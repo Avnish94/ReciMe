@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+
+    <!-- All the sources to include bootstrap into html website -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8">
+    <title>My Saved Recipes</title>
+  </head>
+  <body>
+
+    <!-- navbar stuff -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- saved recipes view -->
+    <div class="container">
+      <h1 align= "center">My Saved Recipes</h1>
+      <br>
+      <div class="row">
+        <div class="col-3">
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="recipe-1-list" data-toggle="list" href="#recipe-1" role="tab">Ex. Recipe 1</a>
+            <a class="list-group-item list-group-item-action" id="recipe-2-list" data-toggle="list" href="#recipe-2" role="tab">Ex. Recipe 2</a>
+            <!--- add more recipes here -->
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="recipe-1" role="tabpanel"> <img src="../images/burger.jpg" alt="recipe-1" height=300px><br>show recipe data here </div>
+            <div class="tab-pane fade" id="recipe-2" role="tabpanel"> <img src="../images/candy.jpg" alt="recipe-2" height=300px><br>show other recipe data here</div>
+            <!--- add more recipes here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
