@@ -10,7 +10,7 @@ body {
 
 .topnav {
   overflow: hidden;
-  background-color: cyan;
+  background-color: white;
 }
 
 .topnav a {
@@ -30,7 +30,7 @@ body {
 }
 
 .topnav a.active {
-  background-color: cyan;
+  background-color: white;
   color: purple;
 
 }
@@ -150,4 +150,3 @@ body {
   grid-template-rows: repeat( auto-fit, minmax(200px, 1fr) );
   grid-auto-flow: row;
 }
-

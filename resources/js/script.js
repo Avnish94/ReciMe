@@ -99,7 +99,7 @@ function populate(){
 
 	var img = document.createElement("img");
 	var source = document.createAttribute("src");
-	source.value = "./a.jfif";
+	source.value = "../resources/images/a.jfif";
 	img.setAttributeNode(source);
 	var att2 = document.createAttribute("class");
 	att2.value="image";
@@ -110,11 +110,11 @@ function populate(){
 
 
 	var colDiv = document.createElement("div");
-	
+
 	var att3 = document.createAttribute("class");
 	att3.value="overlay";
 	colDiv.setAttributeNode(att3);
-	
+
 	var att4 = document.createAttribute("id");
 	att4.value="overlay1";
 	colDiv.setAttributeNode(att4);
@@ -164,7 +164,7 @@ function populate2(){
 
 	var img = document.createElement("img");
 	var source = document.createAttribute("src");
-	source.value = "./b.jfif";
+	source.value = "../resources/images/b.jfif";
 	img.setAttributeNode(source);
 	var att2 = document.createAttribute("class");
 	att2.value="image";
@@ -175,11 +175,11 @@ function populate2(){
 
 
 	var colDiv = document.createElement("div");
-	
+
 	var att3 = document.createAttribute("class");
 	att3.value="overlay";
 	colDiv.setAttributeNode(att3);
-	
+
 	var att4 = document.createAttribute("id");
 	att4.value="overlay1";
 	colDiv.setAttributeNode(att4);
