@@ -63,10 +63,10 @@ var recipe3 = {
 	instructions: "Place sugar and 3 tablespoons butter into a large heavy-bottomed pot over medium heat. \
 	Pour the boiling water over, and stir to dissolve. Allow the mixture to come to a rolling boil. It \
 	will boil up in the pot as if it is going to boil over, but it will settle down. Use some of the remaining butter \
-	to butter a marble slab.                            When the sugar mixture reaches the soft crack stage of 270 to 280 degrees \
+	to butter a marble slab. When the sugar mixture reaches the soft crack stage of 270 to 280 degrees \
 	F (132 to 140 degrees C), remove from the heat immediately. Pour onto the buttered marble slab. Add peppermint oil and food \
 	coloring if desired. Butter your hands, and start pulling up pieces of the sugar blob. Keep  stretching so that it will not set \
-	up. Continue to stretch until it has lost it's shine and is stringier.                            Pull the candy out into one long\
+	up. Continue to stretch until it has lost it's shine and is stringier. Pull the candy out into one long\
 	 string, and cut into 1 inch segments using scissors. Store candies in an airtight tin.",
 
 	image: 'https://spoonacular.com/recipeImages/294685-556x370.png',
@@ -92,7 +92,7 @@ var recipe4 = {
 	instructions: "Melt the butter in a saucepan over medium-high heat. Stir in onion, and cook until tender.\
 	 Mix in rice, and season with cumin, garlic powder, onion powder, pepper, cayenne pepper, and salt. Cook \
 	 and stir until rice is golden brown. Pour in orange juice and broth, and bring to a boil. Reduce heat to\
-	  low, cover and simmer 20 minutes.                            Remove cooked rice from heat, and gently mix\
+	  low, cover and simmer 20 minutes. Remove cooked rice from heat, and gently mix\
 	   in cilantro to serve.",
 
 	image: 'https://spoonacular.com/recipeImages/343465-556x370.jpg',
@@ -105,7 +105,7 @@ var recipe4 = {
 
 
 function api(){
-	console.log(recipe1.instructions);
+	console.log(recipe4.instructions);
 }
 
 
