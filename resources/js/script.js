@@ -60,12 +60,12 @@ var recipe3 = {
   	'water',
   	'white sugar'],
 
-	instructions: "Place sugar and 3 tablespoons butter into a large heavy-bottomed pot over medium heat. \
-	Pour the boiling water over, and stir to dissolve. Allow the mixture to come to a rolling boil. It \
-	will boil up in the pot as if it is going to boil over, but it will settle down. Use some of the remaining butter \
-	to butter a marble slab. When the sugar mixture reaches the soft crack stage of 270 to 280 degrees \
-	F (132 to 140 degrees C), remove from the heat immediately. Pour onto the buttered marble slab. Add peppermint oil and food \
-	coloring if desired. Butter your hands, and start pulling up pieces of the sugar blob. Keep  stretching so that it will not set \
+	instructions: "Place sugar and 3 tablespoons butter into a large heavy-bottomed pot over medium heat.\
+	Pour the boiling water over, and stir to dissolve. Allow the mixture to come to a rolling boil. It\
+	will boil up in the pot as if it is going to boil over, but it will settle down. Use some of the remaining butter\
+	to butter a marble slab. When the sugar mixture reaches the soft crack stage of 270 to 280 degrees\
+	F (132 to 140 degrees C), remove from the heat immediately. Pour onto the buttered marble slab. Add peppermint oil and food\
+	coloring if desired. Butter your hands, and start pulling up pieces of the sugar blob. Keep  stretching so that it will not set\
 	up. Continue to stretch until it has lost it's shine and is stringier. Pull the candy out into one long\
 	 string, and cut into 1 inch segments using scissors. Store candies in an airtight tin.",
 
@@ -137,6 +137,9 @@ function search(){
 	var input = document.getElementById("searchBar").value;
 }
 
+//changes color over image when mouse moves over it
+
+
 function hoverControl(overlay){
 	var overlay =document.getElementById(overlay);
 	overlay.style.opacity=0.75;
@@ -193,6 +196,7 @@ function hoverControl(overlay){
 
 }
 
+//used to remove color over image effect
 function hoverControlStop(overlay){
 	var overlay =document.getElementById(overlay);
 	overlay.style.opacity=0;
@@ -204,11 +208,20 @@ function populate(){
 
 	 /** creates <div class="col"> </div> inside grid*/
 
+	 //get grid
 	var grid = document.getElementById("grid");
+
+	//get create a div
 	var col=document.createElement("div");
+
+	//give class=  text
 	var att = document.createAttribute("class");
 	att.value="col";
+
+	//add class = col
 	col.setAttributeNode(att);
+
+	//add to grid
 	grid.appendChild(col);
 
 
@@ -225,7 +238,8 @@ function populate(){
 	img.setAttributeNode(att2);
 	col.appendChild(img);
 
-	/**	<div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")' onmouseout='hoverControlStop("overlay1")'> */
+	/**	<div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")'
+	 onmouseout='hoverControlStop("overlay1")'> */
 
 
 	var colDiv = document.createElement("div");
@@ -292,7 +306,8 @@ function populate2(){
 	img.setAttributeNode(att2);
 	col.appendChild(img);
 
-	/**	<div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")' onmouseout='hoverControlStop("overlay1")'> */
+	/**	<div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")'
+	 onmouseout='hoverControlStop("overlay1")'> */
 
 
 	var colDiv = document.createElement("div");
@@ -336,6 +351,7 @@ function populate2(){
 
   /**    <img src="./a.jfif" class="image">
 
-        <div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")' onmouseout='hoverControlStop("overlay1")'>
+        <div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")'
+         onmouseout='hoverControlStop("overlay1")'>
     <div class="text" id="overlay1Text">Hello World</div>
   </div> */
