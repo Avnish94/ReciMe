@@ -209,7 +209,9 @@ function hoverControlStop(overlay){
 }
 
 function populate(){
-
+	for (var i = 0; i < 10; i++) {
+		
+	
 
 	 /** creates <div class="col"> </div> inside grid*/
 
@@ -284,74 +286,9 @@ function populate(){
 
 
 }
-
-function populate2(){
-
-
-	 /** creates <div class="col"> </div> inside grid*/
-
-	var grid = document.getElementById("grid");
-	var col=document.createElement("div");
-	var att = document.createAttribute("class");
-	att.value="col";
-	col.setAttributeNode(att);
-	grid.appendChild(col);
-
-
-
-
-	 /** <img src="./a.jfif" class="image"> inside col*/
-
-	var img = document.createElement("img");
-	var source = document.createAttribute("src");
-	source.value = "../resources/images/b.jfif";
-	img.setAttributeNode(source);
-	var att2 = document.createAttribute("class");
-	att2.value="image";
-	img.setAttributeNode(att2);
-	col.appendChild(img);
-
-	/**	<div class="overlay" id = "overlay1" onmouseover='hoverControl("overlay1")'
-	 onmouseout='hoverControlStop("overlay1")'> */
-
-
-	var colDiv = document.createElement("div");
-
-	var att3 = document.createAttribute("class");
-	att3.value="overlay";
-	colDiv.setAttributeNode(att3);
-
-	var att4 = document.createAttribute("id");
-	att4.value="overlay1";
-	colDiv.setAttributeNode(att4);
-
-	var att5 = document.createAttribute("onmouseover");
-	att5.value='hoverControl("overlay1")';
-	colDiv.setAttributeNode(att5);
-
-	var att6 = document.createAttribute("onmouseout");
-	att6.value='hoverControlStop("overlay1")';
-	colDiv.setAttributeNode(att6);
-	col.appendChild(colDiv);
-
-
-/**  <div class="text" id="overlay1Text">Hello World</div> */
-
-	var text =document.createElement("div");
-	var att7 = document.createAttribute("class");
-	att7.value="text";
-	text.setAttributeNode(att7);
-	var att8 = document.createAttribute("id");
-	att8.value="overlay1Text";
-	text.setAttributeNode(att8);
-	colDiv.appendChild(text);
-
-	console.log(document.getElementById("grid"));
-
-
-
-
 }
+
+
 
 
   /**    <img src="./a.jfif" class="image">
