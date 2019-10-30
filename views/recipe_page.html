@@ -6,9 +6,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <style>
         img{
           border-radius:50%;
@@ -17,12 +14,29 @@
   </head>
 
   <body>
-    <nav class="navbar navbr-expand-sm bg-dark justify-content-left">
-      <ul class="navbar-nav">
-        <li class="navbar-item">
-          <a class="nav-link" href="">Home</a>
-        </li>
-        <!-- Add other links to navbar as needed -->
+    <!-- navbar stuff -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#brand"><h2>ReciMe</h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="HomePage.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="saved-recipes.html">My Recipes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#modal">Sign Up</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
     </nav>
 
     <div class="container bg-secondary" style="width: 3000px">
@@ -61,7 +75,7 @@
 
         <div class="col-9">
           <div class="row">   <!--Place for image -->
-            <img class="rounded float-right" src="Chicken-pic-temp-2.jpg" alt="A placeholder chicken picture" height="490" width="850">
+            <img class="rounded float-right" src="../resources/images/Chicken-pic-temp-2.jpg" alt="A placeholder chicken picture" height="490" width="850">
           </div>
 
           <div class="row">  <!--Favorites button-->
@@ -161,4 +175,9 @@
         </div>
       </div>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </body>
+</html>

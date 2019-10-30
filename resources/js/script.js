@@ -191,6 +191,11 @@ function hoverControl(overlay){
 		text.innerHTML = "exotic meal";
 
 	}
+		if(overlay.id == "recipe-1-id"){
+		overlay.style.backgroundColor="magma";
+		text.innerHTML = "Click For More Info";
+
+	}
 
 
 

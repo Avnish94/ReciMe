@@ -5,13 +5,6 @@
     <!-- All the sources to include bootstrap into html website -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="./../resources/js/script.js"></script>
 
     <meta charset="utf-8">
     <title>My Saved Recipes</title>
@@ -19,18 +12,21 @@
   <body>
 
     <!-- navbar stuff -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#brand"><h2>ReciMe</h2></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="HomePage.html">Home <span class="sr-only">(current)</span></a>
+          </li>
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="saved-recipes.html">My Recipes</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#modal">Sign Up</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
@@ -54,13 +50,21 @@
         </div>
         <div class="col-9">
           <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="recipe-1" role="tabpanel"> <img src="../images/burger.jpg" alt="recipe-1" height=300px><br>show recipe data here </div>
-            <div class="tab-pane fade" id="recipe-2" role="tabpanel"> <img src="../images/candy.jpg" alt="recipe-2" height=300px><br>show other recipe data here</div>
+            <div class="tab-pane fade show active" id="recipe-1" role="tabpanel"> <img src="../resources/images/burger.jpg" alt="recipe-1" height=300px><br>show recipe description <br>
+              <a href="recipe_page.html">Click me for the recipe</a>
+            </div>
+            <div class="tab-pane fade" id="recipe-2" role="tabpanel"> <img src="../resources/images/candy.jpg" alt="recipe-2" height=300px><br>show other recipe description</div>
             <!--- add more recipes here -->
           </div>
         </div>
       </div>
     </div>
 
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- our own js file -->
+    <script src="../resources/js/script.js"></script>
   </body>
 </html>
