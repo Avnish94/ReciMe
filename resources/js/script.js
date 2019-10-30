@@ -210,8 +210,8 @@ function hoverControlStop(overlay){
 
 function populate(){
 	for (var i = 0; i < 10; i++) {
-		
-	
+
+
 
 	 /** creates <div class="col"> </div> inside grid*/
 
