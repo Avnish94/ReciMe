@@ -9,6 +9,7 @@ body {
 /* TopNav*/
 
 .topnav {
+  display: block;
   overflow: hidden;
   background-color: white;
 }
