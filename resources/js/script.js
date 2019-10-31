@@ -209,12 +209,18 @@ function hoverControlStop(overlay){
 	overlay.style.backgroundColor="blue";
 }
 
+
 function populate(array){
 
 
 	for (var i = 0; i < 4; i++) {
 		console.log(mockApi[i]);
 	
+
+
+
+
+
 
 	 /** creates <div class="col"> </div> inside grid*/
 
@@ -263,11 +269,11 @@ function populate(array){
 	colDiv.setAttributeNode(att4);
 
 	var att5 = document.createAttribute("onmouseover");
-	att5.value="hoverControl(overlay"+i+")";
+	att5.value="hoverControl("+'"overlay'+i+'")';
 	colDiv.setAttributeNode(att5);
 
 	var att6 = document.createAttribute("onmouseout");
-	att6.value="hoverControlStop(overlay"+i+")";
+	att6.value="hoverControlStop("+'"overlay'+i+'")';
 	colDiv.setAttributeNode(att6);
 	col.appendChild(colDiv);
 	console.log(att6.value);
@@ -281,9 +287,13 @@ function populate(array){
 	att7.value="text";
 	text.setAttributeNode(att7);
 	var att8 = document.createAttribute("id");
-	att8.value="overlay"+i;
+	att8.value="overlay"+i+"Text";
+
 	text.setAttributeNode(att8);
 	colDiv.appendChild(text);
+
+
+
 
 	console.log(document.getElementById("grid"));
 
