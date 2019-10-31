@@ -1,6 +1,6 @@
 /*script practice file */
-
-var recipe1 = {
+var mockApi = [
+	recipe1 = {
 
 	ingredients: [
 	'butter',
@@ -20,7 +20,7 @@ var recipe1 = {
 	name:'Mashed Potatoes with Horseradish'
 }//recipe1
 
-var recipe2 = {
+,recipe2 = {
 
 	ingredients: [
 	'breadcrumbs',
@@ -51,7 +51,7 @@ var recipe2 = {
 	name: "Pan Roasted Cauliflower From Food52"
 }//recipe2
 
-var recipe3 = {
+, recipe3 = {
 
 	ingredients: [
 	'butter',
@@ -74,7 +74,7 @@ var recipe3 = {
 	name: "Grandmama Pampas' Old-Fashion Pull Mints"
 }//recipe3
 
-var recipe4 = {
+, recipe4 = {
 
 	ingredients: [
  	'butter',
@@ -99,6 +99,7 @@ var recipe4 = {
 
 	name: 'Orange Cilantro Rice'
 }//recipe4
+]
 
 
 
@@ -208,9 +209,11 @@ function hoverControlStop(overlay){
 	overlay.style.backgroundColor="blue";
 }
 
-function populate(){
-	for (var i = 0; i < 10; i++) {
-		
+function populate(array){
+
+
+	for (var i = 0; i < 4; i++) {
+		console.log(mockApi[i]);
 	
 
 	 /** creates <div class="col"> </div> inside grid*/
@@ -238,7 +241,7 @@ function populate(){
 
 	var img = document.createElement("img");
 	var source = document.createAttribute("src");
-	source.value = "../resources/images/a.jfif";
+	source.value = mockApi[i].image;
 	img.setAttributeNode(source);
 	var att2 = document.createAttribute("class");
 	att2.value="image";
@@ -256,17 +259,19 @@ function populate(){
 	colDiv.setAttributeNode(att3);
 
 	var att4 = document.createAttribute("id");
-	att4.value="overlay1";
+	att4.value="overlay"+i;
 	colDiv.setAttributeNode(att4);
 
 	var att5 = document.createAttribute("onmouseover");
-	att5.value='hoverControl("overlay1")';
+	att5.value="hoverControl(overlay"+i+")";
 	colDiv.setAttributeNode(att5);
 
 	var att6 = document.createAttribute("onmouseout");
-	att6.value='hoverControlStop("overlay1")';
+	att6.value="hoverControlStop(overlay"+i+")";
 	colDiv.setAttributeNode(att6);
 	col.appendChild(colDiv);
+	console.log(att6.value);
+	console.log(att5.value);
 
 
 /**  <div class="text" id="overlay1Text">Hello World</div> */
@@ -276,7 +281,7 @@ function populate(){
 	att7.value="text";
 	text.setAttributeNode(att7);
 	var att8 = document.createAttribute("id");
-	att8.value="overlay1Text";
+	att8.value="overlay"+i;
 	text.setAttributeNode(att8);
 	colDiv.appendChild(text);
 
