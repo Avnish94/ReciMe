@@ -303,6 +303,14 @@ function populate(array){
 }
 }
 
+function changeColor(id){
+	document.getElementById(id).style.backgroundColor = "green";
+	document.getElementById(id).style.opacity = .5;
+	console.log(id);
+
+}
+
+
 
 
 
