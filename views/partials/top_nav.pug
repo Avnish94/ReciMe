@@ -142,7 +142,9 @@ style.
             input#cpsw.form-control(type='password' name='confirm password' placeholder='Confirm Password' required='required')
           .form-group
             button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' type='submit' onclick='this.form.submit()') Sign Up
-            button#my_login_button.btn.btn-primary.btn-block.login-btn(type='submit' onclick='loginChange()') Log In
+            p Alreay have an account? Log in here:
+              a(href='/login' data-toggle='modal') Log in
+            
       .modal-footer
         #message(style='display:block')
           h3 Password must contain the following:
@@ -225,6 +227,8 @@ script.
   enableButton(length, match);
   }
   }
+
+
   function enableButton(length, match) {
   // TODO: Clear this function for students to implement
   var button = document.getElementById('my_submit_button');
@@ -237,5 +241,10 @@ script.
   function loginChange(){
   var form = document.getElementById("sign_up_form");
   form.removeChild(document.getElementById("confirm_psw"));
+  document.getElementById("my_submit_button").innerHTML.value= "Log in";
+  match.classList.remove("invalid");
+  match.classList.add("valid");
+
+  openModal();
   }
  
