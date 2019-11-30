@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>reciMe-A happy happy place</title>
+    <!-- Bootstrap and MyCSS -->
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="../resources/css/styleSheet.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="../resources/css/login.css">
+    <script type="text/javascript" src="../resources/js/login.js"></script>
+  </head>
+
+  <!-- Modal HTML -->
+	<div id="myModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="avatar">
+						<img src="https://www.tutorialrepublic.com/examples/images/avatar.png" alt="Avatar">
+					</div>
+					<h4 class="modal-title">Sign Up page</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="text" class="form-control" name="firstName" placeholder="First Name"
+							required="required">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" name="lastName" placeholder="Last Name"
+							required="required">
+					</div>
+					<div class="form-group">
+						<input id="psw" type="password" class="form-control" name="password" placeholder="Password"
+							required="required">
+					</div>
+					<div class="form-group">
+						<input id="cpsw" type="password" class="form-control" name="confirm password"
+							placeholder="Confirm Password" required="required">
+					</div>
+					<div class="form-group">
+						<button id="my_submit_button" class="btn btn-primary btn-block login-btn" disabled
+							onClick="onClickFunction()">Sign Up</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div id="message" style="display:block">
+						<h3>Password must contain the following:</h3>
+						<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+						<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+						<p id="number" class="invalid">A <b>number</b></p>
+						<p id="length" class="invalid">Minimum <b>8 characters</b></p>
+						<p id="match" class="invalid">Password and Confirm Password Match</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  <!-- navbar stuff -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#brand" style="text-align: left"><h2>ReciMe</h2></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="HomePage.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="saved-recipes.html">My Recipes</a>
+        </li>
+        <li class="nav-item">
+          <a href="#myModal" class="nav-link" data-toggle="modal" onclick="openModal()">Sign Up</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <body onload="populate()">
+
+  <!-- <div class="topnav" id="bar">
+    <a href="#random" onclick="turnRed()">Random Recipe</a>
+    <a href="#profile" id="test" onclick="turnRed()">Create Profile</a>
+    <a href="#advSearch">Advanced Search</a>
+    <p href="" class="active serif" style="font-size: 40px;padding: 0px 300px;">reciMe</p>
+
+
+    <input type="text" style= "width:300px; height: 60px; font-size: 25px;" placeholder="Search.." id="searchBar" oninput="getSearch()">
+    <a href="#advSearch" class="active" style="float: right;" onclick="search()">
+      <img src="../resources/images/search_bar.jpg" style="
+       width:50px;height:50px;
+       padding: 0px 0px;
+       margin:0px;"></a>
+  </div> -->
+
+  <div class="wrapper" id="grid"></div>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <!-- our own js file -->
+  <script src="../resources/js/script.js"></script>
+  </body>
+</html>

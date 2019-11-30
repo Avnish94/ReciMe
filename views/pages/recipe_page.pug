@@ -1,0 +1,72 @@
+include ../partials/header.pug
+include ../partials/top_nav.pug
+
+style.
+  .parent{
+  display: grid;
+  grid-template-columns:  repeat(3, 3fr);
+  grid-template-rows: 500px 500px;
+  background-color: white ;
+  grid-auto-flow: row;
+  }
+  .ingredients {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  overflow: auto;
+  }
+  .picture {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  overflow:auto;
+
+  }
+  .health{
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  
+  }
+  .instruction{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  }
+  .image {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  }
+  .header {
+  padding: 60px;
+  text-align: center;
+  background: #1abc9c;
+  color: white;
+  font-size: 30px;
+  }
+
+.parent
+  .ingredients
+    table.table
+      th Ingredient
+      th Amount
+      each val in ingredients
+        tr
+          td=val.name
+          td=`${val.amount} ${val.unit}`
+  .picture
+    .header
+      h1=recipe_name
+    img.image(src=image)
+  .health
+    iframe(src=health_info width="1000px" height="1000px")
+  .instruction
+    p=instructions
+  
+include ../partials/footer.pug

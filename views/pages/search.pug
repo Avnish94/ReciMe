@@ -1,0 +1,53 @@
+include ../partials/header.pug
+include ../partials/top_nav.pug
+
+style.
+  .col{
+  margin:0px;
+  padding: 0px;
+  }
+  .wrapper {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
+  grid-template-rows: repeat( auto-fit, minmax(200px, 1fr) );
+  grid-auto-flow: row;
+  }
+  .image {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  }
+  .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: #008CBA;
+  object-fit: fill;
+  }
+  .text {
+  color: black;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  }
+
+#grid.wrapper
+  if(data)
+    each val, i in data
+      .col
+        a(href='/recipe?recipe='+val.id style="display:block")
+          img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
+          .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
+            text(id ='overlay'+i+'Text' name=val.title class="text")
+include ../partials/footer.pug

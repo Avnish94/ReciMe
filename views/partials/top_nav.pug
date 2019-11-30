@@ -1,0 +1,56 @@
+#myModal.modal.fade
+  .modal-dialog.modal-login
+    .modal-content
+      .modal-header
+        .avatar
+          img(src='https://www.tutorialrepublic.com/examples/images/avatar.png' alt='Avatar')
+        h4.modal-title Sign Up page
+        button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
+      .modal-body
+        .form-group
+          input.form-control(type='text' name='firstName' placeholder='First Name' required='required')
+        .form-group
+          input.form-control(type='text' name='lastName' placeholder='Last Name' required='required')
+        .form-group
+          input#psw.form-control(type='password' name='password' placeholder='Password' required='required')
+        .form-group
+          input#cpsw.form-control(type='password' name='confirm password' placeholder='Confirm Password' required='required')
+        .form-group
+          button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' onclick='onClickFunction()') Sign Up
+      .modal-footer
+        #message(style='display:block')
+          h3 Password must contain the following:
+          p#letter.invalid
+            | A 
+            b lowercase
+            |  letter
+          p#capital.invalid
+            | A 
+            b capital (uppercase)
+            |  letter
+          p#number.invalid
+            | A 
+            b number
+          p#length.invalid
+            | Minimum 
+            b 8 characters
+          p#match.invalid Password and Confirm Password Match
+          
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  a.navbar-brand(href='#brand' style='text-align: left')
+    h2 ReciMe
+  button.navbar-toggler(type='button' data-toggle='collapse' data-target='#navbarSupportedContent')
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active
+        a.nav-link(href='HomePage.html')
+          | Home 
+          span.sr-only (current)
+      li.nav-item
+        a.nav-link(href='saved-recipes.html') My Recipes
+      li.nav-item
+        a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
+    form.form-inline.my-2.my-lg-0(action="/search" method="get")
+      input.form-control.mr-sm-2(type='search' placeholder='Search' name="search")
+      button.btn.btn-outline-success.my-2.my-sm-0(type='submit' onclick="this.form.submit()") Search
