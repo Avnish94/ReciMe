@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <title>ReciMe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        img{
+          border-radius:50%;
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar stuff -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#brand"><h2>ReciMe</h2></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="HomePage.html">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="saved-recipes.html">My Recipes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#modal">Sign Up</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+
+    <div class="container bg-secondary" style="width: 3000px">
+      <div class="row max-height: 100%">
+        <div class="col-3">  <!-- Will likely contain ingredients & materials -->
+          <h2>
+            <p><a href="#" class="text-light">What you'll need:</a></p>
+          </h2>
+          <h4>
+            <p><a href="#" class="text-light">Ingredients:</a></p>
+          </h4>
+          <ul class="list-group list-group-flush">  <!--Could later make into a check list, with things the user has already checked off-->
+            <li class="list-group-item">Chicken breast</li>
+            <li class="list-group-item">Olive oil</li>
+            <li class="list-group-item">Salt & Pepper</li>
+          </ul>
+
+          <h4>
+            <p><a href="#" class="text-light">Materials:</a></p>
+          </h4>
+          <ul class="list-group list-group-flush">  <!--Could later make into a check list, with things the user has already checked off-->
+            <li class="list-group-item">Skillet (lid optional)</li>
+            <li class="list-group-item">Spatula</li>
+            <li class="list-group-item">Rolling pin</li>
+            <li class="list-group-item">Gallon size ziplock bag</li>
+          </ul>
+
+          <h2>
+            <p><br></p>
+            <p><a href="#" class="text-light">Health Info:</a></p>
+          </h2>
+          <h5>
+            <p><a href="#" class="text-light">Not sure how we plan on formatting this, but I left room for it.</a></p>
+          </h5>
+        </div>
+
+        <div class="col-9">
+          <div class="row">   <!--Place for image -->
+            <img class="rounded float-right" src="../resources/images/Chicken-pic-temp-2.jpg" alt="A placeholder chicken picture" height="490" width="850">
+          </div>
+
+          <div class="row">  <!--Favorites button-->
+            <button type="button" class="btn btn-warning">Favorite</button>
+          </div>
+
+          <div class="row">  <!--Recipe (hard-coded for now)-->
+            <h2>
+              <!--Bootstrap page said to use anchor tags to change text color, but that turned everything into a link. Will research alternatives.-->
+              <p><a href="#" class="text-light">Cooking Instructions:</a></p>
+            </h2>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 1:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Defrost the chicken breast.</a></p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 2:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Put the chicken in the ziplock bag and flatten with the rolling pin so it cooks evenly.</a></p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 3:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Season the chicken.</a></p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 4:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Pour the olive oil into the pan & heat over the stove top. Once hot, add the chicken.</a></p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 5:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Flip the chicken once the bottom side is done.</a></p>
+              </h5>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h3>
+                <p><a href="#" class="text-light">Step 6:</a></p>
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-1">
+              <h5>
+                <p><a href="#" class="text-light">Remove from skillet with the spatula, and enjoy.</a></p>
+              </h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+</html>

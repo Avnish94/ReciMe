@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+  <html lang="en" dir="ltr">
+    <head>
+      <style>
+        #text {width: 100%;}
+      </style>
+      <meta charset="utf-8">
+      <title>Recipe Input</title>
+
+      <!-- All the sources to include bootstrap into html website -->
+      <!-- Latest compiled and minified CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <!-- jQuery library -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <!-- Popper JS -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    </head>
+    <body>
+      <!-- navbar stuff -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1 align="center">
+          Add A Recipe
+        </h1>
+        <br>
+        <form>
+          <div class="form-group">
+            <label for="rec-title"><h5>Recipe Name</h5></label>
+            <input type="text" class="form-control" id="rec-title" placeholder="Recipe Name">
+          </div>
+          <div class="form-group">
+            <label for="name"><h5>Author Name</h5></label>
+            <input type="text" class="form-control" id="name" placeholder="Name">
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="upload"><h5>Upload Picture:</h5></label>
+              <input type="file" class="form-control-file" id="upload" placeholder="Choose Image">
+            </div>
+            <div class="col">
+              <label for="drop"><h5>Meal Category</h5></label>
+              <select class="form-control" id="drop">
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+                <option>Dessert</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="text"><h5>Recipe Instructions</h5></label>
+            <textarea name="Rec-Instructions" rows="14" width="100px" id="text" placeholder="Fill Me"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <label for="checks"><h5>Select Tags</h5></label>
+              <div id="checks">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="cb1" value="GF">
+                  <label class="form-check-label" for="cb1">Gluten Free</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="cb2" value="spicy">
+                  <label class="form-check-label" for="cb2">Spicy</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="cb3" value="V">
+                  <label class="form-check-label" for="cb3">Vegan</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="cb4" value="LC">
+                  <label class="form-check-label" for="cb4">Low Calories</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="cb5" value="veg">
+                  <label class="form-check-label" for="cb5">Vegetarian</label>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <label for="visibility"><h5>Visibility</h5></label>
+              <div id="visibility">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="private">Private
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="options" id="public">Public
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <label for="login"><h5>Login to Finish Submitting</h5></label>
+          <div class="form-row" id="login">
+            <div class="col">
+              <input type="text" name="user" class="form-control" placeholder="Username">
+            </div>
+            <div class="col">
+              <input type="password" name="pass" class="form-control" placeholder="Password">
+            </div>
+          </div>
+          <br>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" value="RemMe" id="RemMe">
+            <label class="form-check-input" for="RemMe">Remember Me</label>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <br>
+    </body>
+  </html>
