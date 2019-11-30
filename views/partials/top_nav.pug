@@ -134,31 +134,18 @@ style.
         h4.modal-title Sign Up page
         button.close(type='button' data-dismiss='modal' aria-hidden='true') &times;
       .modal-body
-        form(action='/sign_up' method='post')
+        form#sign_up_form(action='/sign_up' method='post')
           .form-group
-            input.form-control(type='text' name='firstName' placeholder='First Name' required='required')
-          .form-group
-            input.form-control(type='text' name='lastName' placeholder='Last Name' required='required')
-          .form-group
+            input#user_name.form-control(type='text' name='User name:' placeholder='UserName' required='required')
             input#psw.form-control(type='password' name='password' placeholder='Password' required='required')
-          .form-group
+          .form-group#confirm_psw
             input#cpsw.form-control(type='password' name='confirm password' placeholder='Confirm Password' required='required')
           .form-group
             button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' type='submit' onclick='this.form.submit()') Sign Up
+            button#my_login_button.btn.btn-primary.btn-block.login-btn(type='submit' onclick='loginChange()') Log In
       .modal-footer
         #message(style='display:block')
           h3 Password must contain the following:
-          p#letter.invalid
-            | A 
-            b lowercase
-            |  letter
-          p#capital.invalid
-            | A 
-            b capital (uppercase)
-            |  letter
-          p#number.invalid
-            | A 
-            b number
           p#length.invalid
             | Minimum 
             b 8 characters
@@ -182,6 +169,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
       input.form-control.mr-sm-2(type='search' placeholder='Search' name="search")
       button.btn.btn-outline-success.my-2.my-sm-0(type='submit' onclick="this.form.submit()") Search
+
 
 script.
   function openModal() {
@@ -212,30 +200,6 @@ script.
   - Each else block stands for a failed condition, so the green check mark needs to be a red cross again.
   - All that you need to do is, in each of the blocks, fill in the correct classNames for the remove and the add methods.
   */
-  // Validate lowercase letters
-  if(myInput.value.match(lowerCaseLetters)) {
-  letter.classList.remove("invalid");
-  letter.classList.add("valid");
-  } else {
-  letter.classList.remove("valid");
-  letter.classList.add("invalid");
-  }
-  // Validate capital letters
-  if(myInput.value.match(upperCaseLetters)) {
-  capital.classList.remove("invalid");
-  capital.classList.add("valid");
-  } else {
-  capital.classList.remove("valid");
-  capital.classList.add("invalid");
-  }
-  // Validate numbers
-  if(myInput.value.match(numbers)) {
-  number.classList.remove("invalid");
-  number.classList.add("valid");
-  } else {
-  number.classList.remove("valid");
-  number.classList.add("invalid");
-  }
   // Validate length
   if(myInput.value.length >= minLength) {
   length.classList.remove("invalid");
@@ -258,19 +222,20 @@ script.
   match.classList.add("invalid");
   }
   // Disable or Enable the button based on the elements in classList
-  enableButton(letter, capital, number, length, match);
+  enableButton(length, match);
   }
   }
-  function enableButton(letter, capital, number, length, match) {
+  function enableButton(length, match) {
   // TODO: Clear this function for students to implement
   var button = document.getElementById('my_submit_button');
-  var condition = letter.classList.contains("valid") && capital.classList.contains("valid")
-  && number.classList.contains("valid") && length.classList.contains("valid")
-  &&match.classList.contains("valid"); // TODO: Replace false with the correct condition
+  var condition = length.classList.contains("valid") &&match.classList.contains("valid"); // TODO: Replace false with the correct condition
   if(condition) {
   button.disabled = false;
   }
   }
-  function onClickFunction() {
-  alert("Hey! I'm all green! Well done.");
-  }      
+
+  function loginChange(){
+  var form = document.getElementById("sign_up_form");
+  form.removeChild(document.getElementById("confirm_psw"));
+  }
+ 
