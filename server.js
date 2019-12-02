@@ -21,7 +21,7 @@ const pug = require('pug'); // Add the 'pug' view engine
 //Create Database Connection
 const pgp = require('pg-promise')();
 
-//Create fetch API. use command: 'npm i node-fetch --save' to install 
+//Create fetch API. use command: 'npm i node-fetch --save' to install
 const fetch = require("node-fetch");
 
 //attempting to add jquery to this server
@@ -38,8 +38,8 @@ const fetch = require("node-fetch");
   password: This the password for accessing the database.  You'll need to set a password USING THE PSQL TERMINAL THIS IS NOT A PASSWORD FOR POSTGRES USER ACCOUNT IN LINUX!
 
 **********************/
-// REMEMBER to chage the password
 
+// REMEMBER to chage the password
 const dbConfig = {
 	host: 'localhost',
 	port: 5432,
@@ -56,12 +56,13 @@ app.use(express.static(__dirname + '/')); // This line is necessary for us to us
 
 var apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145'
 
-/*
+
 
 function get_all_files(){
   var files = fs.readdirSync('recipes');
   return files
 }
+
 
 
 // Take in the username of the person
@@ -76,19 +77,17 @@ function add_data_all(user){
   for(i=0; i<length; i++){
   let rawdata = fs.readFileSync('recipes/'+files[i]);
   let recipe= JSON.parse(rawdata)
+  recipe={"title": recipe.title, "image": recipe.image, "id": recipe.id}
   recipe=JSON.stringify(recipe);
-
-  var test= '{"recipe": 0}'
-  var query ='INSERT INTO favorites(user_name, recipe) VALUES('+user+','+test+")'"
+  console.log(recipe)
   db.query("insert into favorites (user_name, recipe) values ($1, $2) ", [user, recipe])
 
   }
 
 }
 
-add_data_all('Aaron');
 
-*/
+
 
 app.get('/', function(req, res) {
 
@@ -109,7 +108,7 @@ app.get('/', function(req, res) {
         data: data.recipes
 
       })
-        });//end fetch 
+        });//end fetch
 }); //end get request
 
 app.get('/recipe', function(req, res) {
@@ -126,7 +125,7 @@ app.get('/recipe', function(req, res) {
          var image = data.image;
          var health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
          var instructions = data.instructions;
-         
+
          //create smaller array ingredients for ease of use
          var tempIngredients = data.extendedIngredients;
          var ingredients = [];
@@ -134,12 +133,12 @@ app.get('/recipe', function(req, res) {
           ingredients[i]= {
           "name": tempIngredients[i].name,
           "amount": tempIngredients[i].amount,
-          "unit":tempIngredients[i].unit           
+          "unit":tempIngredients[i].unit
          }
           }//for loop
 
-          
-         
+
+
       res.render('pages/recipe_page',{
         my_title: "reciMe",
         health_info: health_info,
@@ -172,7 +171,7 @@ app.get('/search', function(req, res) {
         my_title: "reciMe",
         data: data.results
       })
-        });//end fetch 
+        });//end fetch
 
 }); //end get request*/
 
