@@ -64,6 +64,8 @@ style.
     .header
       h1=recipe_name
     img.image(src=image)
+    a(href=`/favorite?title=${recipe_name}&image=${image}&recipe_id=${id}` style="display:block")
+      button#favorite.btn.btn-primary.btn-block.login-btn(type='submit') Favorite
   .health
     iframe(src=health_info width="1000px" height="1000px")
   .instruction

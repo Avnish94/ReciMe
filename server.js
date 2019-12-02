@@ -147,7 +147,9 @@ app.get('/recipe', function(req, res) {
         ingredients: ingredients,
         image: image,
         instructions: instructions,
-        recipe_name: data.title
+        recipe_name: data.title,
+        id:data.id,
+        data:data
 
       })
         });//end fetch
@@ -335,6 +337,70 @@ res.render('pages/login.pug')
 
 
 });//post
+
+app.get('/favorite', function(req, res) {
+
+  var query1 = `SELECT * FROM favorites;`;
+  var title = req.query.title;
+  var image = req.query.image;
+  var id = parseInt(req.query.recipe_id, 10);
+
+ 
+
+  //var user_name = GET USER NAME SOMEHOW
+
+  var db_json = {
+    "id": id,
+    "image": image,
+    "title": title
+    
+  }
+
+var db_json=JSON.stringify(db_json);  
+
+//still need to figure out how to get the user here as well. forced login is problably the way to go
+//Might need to make an async function or somethinfg here, but i dont think itll matter too much
+//but the data base takes time to insert things so we migth want to add a setTimeout or something for doing things 
+//after here. but i doubt it will matter
+var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('Aaron', '${db_json}');`;
+   
+//db.query(add_favorite);
+
+
+db.task('get-everything', task => {
+
+  
+
+    return task.batch([
+        task.any(query1)
+
+    ]);
+})
+.then(data => {
+  
+  console.log(data[0]);
+ /* for(var i=0;i<data[0].length;i++){
+  console.log(data[0][i].recipe);
+
+}*/
+
+
+
+})//data
+.catch(error => {
+    // display error message in case an error
+        request.flash('error', err);
+        res.render('pages/team_stats',{
+      my_title: "Page Title Here",
+      result_1: '',
+      result_2: '',
+      result_3: ''
+    })
+});
+
+
+
+});//get
 
 
 app.listen(3000);
