@@ -40,12 +40,14 @@ const fetch = require("node-fetch");
 **********************/
 
 // REMEMBER to chage the password
+
+var password='qwerty';
 const dbConfig = {
 	host: 'localhost',
 	port: 5432,
 	database: 'recipe_db',
 	user: 'postgres',
-	password: 'lit'
+	password: password
 };
 
 let db = pgp(dbConfig);
@@ -174,6 +176,168 @@ app.get('/search', function(req, res) {
         });//end fetch
 
 }); //end get request*/
+
+
+app.get('/login', function(req, res) {
+
+  var query1 = `SELECT * FROM users;`
+
+
+
+
+
+db.task('get-everything', task => {
+
+  
+
+    return task.batch([
+        task.any(query1)
+
+    ]);
+})
+.then(data => {
+  
+
+
+
+res.render('pages/login.pug',{
+
+  data: data
+
+      })
+
+})//data
+.catch(error => {
+    // display error message in case an error
+        request.flash('error', err);
+        res.render('pages/team_stats',{
+      my_title: "Page Title Here",
+      result_1: '',
+      result_2: '',
+      result_3: ''
+    })
+});
+
+
+
+});//get 
+app.post('/login', function(req, res) {
+
+  //get all users and passwords
+  var query1 = `SELECT * FROM users;`
+
+
+
+  var password=req.body.password;
+  var user_name=req.body.user_name;
+
+
+
+
+//do not know how to tell database to insert, something
+//like task.none.but all 
+
+db.task(task => { 
+
+
+    return task.batch([
+        task.any(query1)
+
+    ]);
+})
+.then(data => {
+  
+var user_array=data[0];
+
+  //search array for user
+for(var i=0;i<user_array.length;i++){
+  var db_user = user_array[i].user_name;
+  var db_user_password = user_array[i].password;
+  if(user_name==db_user){
+    console.log("WE CAN NOW LOAD Favorite RECIPES");
+    //verify entered passwrod matches db
+    if(db_user_password==password){
+      console.log("password verified, yay we can log them in");
+    }//inner if
+  }//outer if
+}
+
+//will have to render recipe page
+//need to change topnav as well to remove signup
+//and change where favorite recipes links to
+//cannot edit headers after sent, so we may just want to remake pages with a different topNav
+//not sure about what best way to do this is. need to think for now. 
+res.render('pages/login.pug',{
+
+  data: data
+
+      })
+res.render('partials/top_nav.pug',{
+
+  data: data
+
+      })
+
+})//data
+.catch(error => {
+    // display error message in case an error
+        request.flash('error', err);
+        res.render('pages/team_stats',{
+      my_title: "Page Title Here",
+      result_1: '',
+      result_2: '',
+      result_3: ''
+    })
+});
+
+
+
+});//post
+
+
+app.post('/sign_up', function(req, res) {
+
+  var query1 = `SELECT * FROM users;`
+  var password=req.body.password;
+  var user_name=req.body.user_name;
+  console.log(`password: ${password}`);
+  console.log(`uName: ${user_name}`);
+
+
+
+
+
+db.task('get-everything', task => {
+
+  
+
+    return task.batch([
+        task.any(query1)
+
+    ]);
+})
+.then(data => {
+  
+
+console.log(data);
+
+res.render('pages/login.pug')
+
+})//data
+.catch(error => {
+    // display error message in case an error
+        request.flash('error', err);
+        res.render('pages/team_stats',{
+      my_title: "Page Title Here",
+      result_1: '',
+      result_2: '',
+      result_3: ''
+    })
+});
+
+
+
+});//get 
 
 
 app.listen(3000);
