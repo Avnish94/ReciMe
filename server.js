@@ -183,7 +183,7 @@ app.get('/login', function(req, res) {
   var query1 = `SELECT * FROM users;`
 
 
-
+console.log(get_all_files())
 
 
 db.task('get-everything', task => {
@@ -233,10 +233,6 @@ app.post('/login', function(req, res) {
 
 
 
-
-//do not know how to tell database to insert, something
-//like task.none.but all 
-
 db.task(task => { 
 
 
@@ -272,11 +268,11 @@ res.render('pages/login.pug',{
   data: data
 
       })
-res.render('partials/top_nav.pug',{
+/*res.render('partials/top_nav.pug',{
 
   data: data
 
-      })
+      })*/
 
 })//data
 .catch(error => {
@@ -303,8 +299,9 @@ app.post('/sign_up', function(req, res) {
   console.log(`password: ${password}`);
   console.log(`uName: ${user_name}`);
 
+  var add_user=`INSERT INTO users(user_name, password) VALUES ('${user_name}', '${password}');`;
 
-
+  db.query(add_user);
 
 
 db.task('get-everything', task => {
@@ -337,7 +334,7 @@ res.render('pages/login.pug')
 
 
 
-});//get 
+});//post
 
 
 app.listen(3000);
