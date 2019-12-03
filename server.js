@@ -56,7 +56,9 @@ let db = pgp(dbConfig);
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 
-var apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145'
+const apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145';
+
+var user_name = "not_logged";
 
 
 
@@ -93,7 +95,15 @@ function add_data_all(user){
 
 app.get('/', async function(req, res) {
 
+
     //gets random recipes, can change how many by changing number
+    if(user_name=="not_logge"){
+      res.render('pages/login')
+    }
+    else{
+
+    user_name="TEST";
+
 
     var number = 4;
 
@@ -107,10 +117,12 @@ app.get('/', async function(req, res) {
         data: data.recipes
 
       })   
+      }//end else
 
 }); //end get request
 
 app.get('/recipe', async function(req, res) {
+  console.log(user_name);
 
   var recipe_id= req.query.recipe;
 
@@ -182,6 +194,9 @@ res.render('pages/login',{
 //handles when user signs in
 app.post('/login', async function(req, res) {
 
+
+
+
   //get all users and passwords
   var query1 = `SELECT * FROM users;`;
   const data = await getPostgres(query1);
@@ -210,12 +225,8 @@ for(var i=0;i<user_array.length;i++){
 //and change where favorite recipes links to
 //cannot edit headers after sent, so we may just want to remake pages with a different topNav
 //not sure about what best way to do this is. need to think for now. 
-res.render('pages/login')
-/*res.render('partials/top_nav.pug',{
+res.render('pages/favorites')
 
-  data: data
-
-      })*/
 
 
 
@@ -269,18 +280,34 @@ var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('Aaron', '${
 
 const favorite_recipes = await getPostgres(query1);
 
+//api query for getting recipe info bulk
 var url= `https://api.spoonacular.com/recipes/informationBulk?${apiKey}&ids=`;
 for(var i =0;i<favorite_recipes.length;i++){
+
+
 var id = favorite_recipes[i].recipe.id;
+
+ //if recipe_id is the last one, dont add a comma after
   if(i==favorite_recipes.length-1){
-url = `${url}${id}`;
-}//if
-else{
-  url = `${url}${id},`;
-}
+  url = `${url}${id}`;
+  }
+  else{
+    url = `${url}${id},`;
+  }
+
+
 }//for loop
 console.log(url);
- 
+
+const data= await getData(url);
+
+ console.log(data);
+
+        res.render('pages/home_page',{
+        my_title: "reciMe",
+        data: data
+
+      })   
              
 
 });//get
