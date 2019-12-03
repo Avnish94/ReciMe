@@ -1,0 +1,28 @@
+include ../partials/header.pug
+include ../partials/top_nav.pug
+
+// saved recipes view
+.container
+  h1(align='center') My Saved Recipes
+  br
+  .row
+    .col-3
+      #list-tab.list-group(role='tablist')
+        a#recipe-1-list.list-group-item.list-group-item-action.active(data-toggle='list', href='#recipe-1', role='tab') Ex. Recipe 1
+        a#recipe-2-list.list-group-item.list-group-item-action(data-toggle='list', href='#recipe-2', role='tab') Ex. Recipe 2
+        // - add more recipes here
+    .col-9
+      #nav-tabContent.tab-content
+        #recipe-1.tab-pane.fade.show.active(role='tabpanel')
+          img(src='../resources/images/burger.jpg', alt='recipe-1', height='300px')
+          br
+          | show recipe description
+          br
+          a(href='recipe_page.html') Click me for the recipe
+        #recipe-2.tab-pane.fade(role='tabpanel')
+          img(src='../resources/images/candy.jpg', alt='recipe-2', height='300px')
+          br
+          | show other recipe description
+        // - add more recipes here
+
+include ../partials/footer.pug
