@@ -166,27 +166,25 @@ app.get('/search', async function(req, res) {
 
 }); //end get request
 
-
+//simply loads login page to get data from user
 app.get('/login', async function(req, res) {
 
   var query1 = `SELECT * FROM users;`;
   const users = await getPostgres(query1);
 
-res.render('pages/login.pug',{
+res.render('pages/login',{
+  data:users
 
       })
 
-
-
-
 });//get 
+
+//handles when user signs in
 app.post('/login', async function(req, res) {
 
   //get all users and passwords
   var query1 = `SELECT * FROM users;`;
   const data = await getPostgres(query1);
-
-
 
   var password=req.body.password;
   var user_name=req.body.user_name;
@@ -212,11 +210,7 @@ for(var i=0;i<user_array.length;i++){
 //and change where favorite recipes links to
 //cannot edit headers after sent, so we may just want to remake pages with a different topNav
 //not sure about what best way to do this is. need to think for now. 
-res.render('pages/login.pug',{
-
-  data: data
-
-      })
+res.render('pages/login')
 /*res.render('partials/top_nav.pug',{
 
   data: data
@@ -233,38 +227,21 @@ app.post('/sign_up', function(req, res) {
   var query1 = `SELECT * FROM users;`;
   var password=req.body.password;
   var user_name=req.body.user_name;
-  console.log(`password: ${password}`);
-  console.log(`uName: ${user_name}`);
 
   var add_user=`INSERT INTO users(user_name, password) VALUES ('${user_name}', '${password}');`;
 
   db.query(add_user);
 
 
-db.any(query1)
-        .then(function (rows) {        
-
-          console.log(rows);
-        res.render('pages/favorites',{
-            my_title: "reciMe",
-            data: rows
-
-      })//rows
-
-        })//then
-        .catch(function (err) {
-            // display error message in case an error
-            req.flash('error', err); //if this doesn't work for you replace with console.log
-            
-        })//catch     
+res.render('pages/login') 
 
 
 
 });//post
 
-app.get('/favorite', function(req, res) {
+app.get('/favorite', async function(req, res) {
 
-  var query1 = `SELECT * FROM favorites;`;
+  var query1 = `SELECT recipe FROM favorites;`;
   var title = req.query.title;
   var image = req.query.image;
   var id = parseInt(req.query.recipe_id, 10);
@@ -288,42 +265,22 @@ var db_json=JSON.stringify(db_json);
 //after here. but i doubt it will matter
 var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('Aaron', '${db_json}');`;
    
-db.query(add_favorite);
+//db.query(add_favorite);
 
-db.any(query1)
+const favorite_recipes = await getPostgres(query1);
 
-        .then(function (rows) {
-
-          //need to do query here to get
-        var url= `https://api.spoonacular.com/recipes/informationBulk?ids=715538,71642&${apiKey}`
-
-
-
-
-     fetch(url).then(response => {
-          return response.json();
-        })
-        .then(data =>{
-          console.log(data.recipes);
-      res.render('pages/home_page',{
-        my_title: "reciMe",
-        data: data.recipes
-
-      })
-        });//end fetch
-       /* res.render('pages/favorites',{
-            my_title: "reciMe",
-            data: rows
-
-      })//rows*/
-      
-
-        })//then
-        .catch(function (err) {
-            // display error message in case an error
-            req.flash('error', err); //if this doesn't work for you replace with console.log
-            
-        })//catch    
+var url= `https://api.spoonacular.com/recipes/informationBulk?${apiKey}&ids=`;
+for(var i =0;i<favorite_recipes.length;i++){
+var id = favorite_recipes[i].recipe.id;
+  if(i==favorite_recipes.length-1){
+url = `${url}${id}`;
+}//if
+else{
+  url = `${url}${id},`;
+}
+}//for loop
+console.log(url);
+ 
              
 
 });//get
@@ -336,7 +293,7 @@ async function getData(url){
 }
 
 async function getPostgres(query){
-  const data = await db.any(query1);
+  const data = await db.any(query);
   return data;
  
 }
