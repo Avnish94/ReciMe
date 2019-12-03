@@ -58,9 +58,6 @@ app.use(express.static(__dirname + '/')); // This line is necessary for us to us
 
 const apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145';
 
-var user_name = "not_logged";
-
-
 
 function get_all_files(){
   var files = fs.readdirSync('recipes');
@@ -90,52 +87,46 @@ function add_data_all(user){
 
 }
 
-
-
-
+//renders home page when user puts in browser localhost:30000/
 app.get('/', async function(req, res) {
 
+    var number = 2;
 
-    //gets random recipes, can change how many by changing number
-    if(user_name=="not_logge"){
-      res.render('pages/login')
-    }
-    else{
+    //calls random recipe query on spoonacular
+    //number sets amount of recipes returned
+    var api_query = `https://api.spoonacular.com/recipes/random?number=${number}&${apiKey}`;
 
-    user_name="TEST";
+        /*returns json {recipes:
+                                [ recipejson,
+                                  recipejson ] }
+        and sends to home_page.pug as data
+        */
+        const recipe_data = await getData(api_query);        
 
-
-    var number = 4;
-
-    var url= `https://api.spoonacular.com/recipes/random?number=${number}&${apiKey}`;
-
-        const data = await getData(url);
-        
-
+        //see home_page.pug
         res.render('pages/home_page',{
         my_title: "reciMe",
-        data: data.recipes
+        data: recipe_data.recipes
 
-      })   
-      }//end else
+      })        
 
 }); //end get request
 
-app.get('/recipe', async function(req, res) {
-  console.log(user_name);
+app.get('/recipe', async function(req, res) {  
 
   var recipe_id= req.query.recipe;
 
-  var url = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`;
+  //gets one recipe json
+  var api_query = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`;
 
-  const data = await getData(url); 
+  const data = await getData(api_query); 
 
-        var image = data.image;
-         var health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
-         var instructions = data.instructions;
+         const image = data.image;
+         const health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
+         const instructions = data.instructions;
 
          //create smaller array ingredients for ease of use
-         var tempIngredients = data.extendedIngredients;
+         const tempIngredients = data.extendedIngredients;
          var ingredients = [];
          for (var i = 0;i<tempIngredients.length;i++) {
           ingredients[i]= {
@@ -153,13 +144,12 @@ app.get('/recipe', async function(req, res) {
         image: image,
         instructions: instructions,
         recipe_name: data.title,
-        id:data.id,
-        data:data
+        id: data.id,
+        data: data
 
       })
 
 }); //end get request
-
 
 app.get('/search', async function(req, res) {
 
@@ -167,9 +157,9 @@ app.get('/search', async function(req, res) {
   var number = 4;
 
   //api call based on string entered by user
-  var url = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;
+  var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;
 
-  const data = await getData(url);
+  const data = await getData(api_query);
 
         res.render('pages/search',{
         my_title: "reciMe",

@@ -1,6 +1,7 @@
 include ../partials/header.pug
 include ../partials/top_nav.pug
 
+//everything in style is used to create grid and color change on hover effect
 style.
   .col{
   margin:0px;
@@ -42,10 +43,16 @@ style.
   -ms-transform: translate(-50%, -50%);
   }
 
+   
+//makes grid
 #grid.wrapper
+  //ensures we have recipe data to display, else there is cannot read property length, undefined error
   if(data)
+    //gets recipe json from array and array index
     each val, i in data
+      //col makes a grid item
       .col
+        //image and color change effect wrapped in a link to get recipe
         a(href='/recipe?recipe='+val.id style="display:block")
           img.image(src=val.image alt=val.title)
           .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
