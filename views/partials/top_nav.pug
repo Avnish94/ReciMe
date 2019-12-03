@@ -142,8 +142,7 @@ style.
             input#cpsw.form-control(type='password' name='confirm password' placeholder='Confirm Password' required='required')
           .form-group
             button#my_submit_button.btn.btn-primary.btn-block.login-btn(disabled='' type='submit' onclick='this.form.submit()') Sign Up
-            p Alreay have an account? Log in here:
-              a(href='/login' data-toggle='modal') Log in
+            p Alreay have an account? Log in #[a(href='/login' data-toggle='modal') here]
             
       .modal-footer
         #message(style='display:block')
@@ -161,11 +160,11 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   #navbarSupportedContent.collapse.navbar-collapse
     ul.navbar-nav.mr-auto
       li.nav-item.active
-        a.nav-link(href='home_page.pug')
+        a.nav-link(href='/home_page')
           | Home 
           span.sr-only (current)
       li.nav-item
-        a.nav-link(href='saved-recipes.pug') My Recipes
+        a.nav-link(href='/saved-recipes') My Recipes
       li.nav-item
         a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
