@@ -91,7 +91,7 @@ function add_data_all(user){
 
 
 
-app.get('/', function(req, res) {
+app.get('/', async function(req, res) {
 
     //gets random recipes, can change how many by changing number
 
@@ -99,32 +99,26 @@ app.get('/', function(req, res) {
 
     var url= `https://api.spoonacular.com/recipes/random?number=${number}&${apiKey}`;
 
+        const data = await getData(url);
+        
 
-     fetch(url).then(response => {
-          return response.json();
-        })
-        .then(data =>{
-
-      res.render('pages/home_page',{
+        res.render('pages/home_page',{
         my_title: "reciMe",
         data: data.recipes
 
-      })
-        });//end fetch
+      })   
+
 }); //end get request
 
-app.get('/recipe', function(req, res) {
+app.get('/recipe', async function(req, res) {
 
   var recipe_id= req.query.recipe;
 
-  var url = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`
+  var url = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`;
 
-       fetch(url).then(response => {
-          return response.json();
-        })
-        .then(data =>{
+  const data = await getData(url); 
 
-         var image = data.image;
+        var image = data.image;
          var health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
          var instructions = data.instructions;
 
@@ -140,7 +134,6 @@ app.get('/recipe', function(req, res) {
           }//for loop
 
 
-
       res.render('pages/recipe_page',{
         my_title: "reciMe",
         health_info: health_info,
@@ -152,81 +145,46 @@ app.get('/recipe', function(req, res) {
         data:data
 
       })
-        });//end fetch
+
+}); //end get request
 
 
-}); //end get request*/
-
-
-app.get('/search', function(req, res) {
+app.get('/search', async function(req, res) {
 
   var search =req.query.search;
   var number = 4;
 
   //api call based on string entered by user
-  var url = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`
+  var url = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;
 
-     fetch(url).then(response => {
-          return response.json();
-        })
-        .then(data =>{
+  const data = await getData(url);
 
-      res.render('pages/search',{
+        res.render('pages/search',{
         my_title: "reciMe",
         data: data.results
       })
-        });//end fetch
 
-}); //end get request*/
-
-
-app.get('/login', function(req, res) {
-
-  var query1 = `SELECT * FROM users;`
+}); //end get request
 
 
-console.log(get_all_files())
+app.get('/login', async function(req, res) {
 
-
-db.task('get-everything', task => {
-
-  
-
-    return task.batch([
-        task.any(query1)
-
-    ]);
-})
-.then(data => {
-  
-
-
+  var query1 = `SELECT * FROM users;`;
+  const users = await getPostgres(query1);
 
 res.render('pages/login.pug',{
 
-  data: data
-
       })
 
-})//data
-.catch(error => {
-    // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/team_stats',{
-      my_title: "Page Title Here",
-      result_1: '',
-      result_2: '',
-      result_3: ''
-    })
-});
 
 
 
 });//get 
-app.post('/login', function(req, res) {
+app.post('/login', async function(req, res) {
 
   //get all users and passwords
-  var query1 = `SELECT * FROM users;`
+  var query1 = `SELECT * FROM users;`;
+  const data = await getPostgres(query1);
 
 
 
@@ -234,17 +192,6 @@ app.post('/login', function(req, res) {
   var user_name=req.body.user_name;
 
 
-
-db.task(task => { 
-
-
-    return task.batch([
-        task.any(query1)
-
-    ]);
-})
-.then(data => {
-  
 var user_array=data[0];
 
   //search array for user
@@ -276,18 +223,6 @@ res.render('pages/login.pug',{
 
       })*/
 
-})//data
-.catch(error => {
-    // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/team_stats',{
-      my_title: "Page Title Here",
-      result_1: '',
-      result_2: '',
-      result_3: ''
-    })
-});
-
 
 
 });//post
@@ -295,7 +230,7 @@ res.render('pages/login.pug',{
 
 app.post('/sign_up', function(req, res) {
 
-  var query1 = `SELECT * FROM users;`
+  var query1 = `SELECT * FROM users;`;
   var password=req.body.password;
   var user_name=req.body.user_name;
   console.log(`password: ${password}`);
@@ -306,33 +241,22 @@ app.post('/sign_up', function(req, res) {
   db.query(add_user);
 
 
-db.task('get-everything', task => {
+db.any(query1)
+        .then(function (rows) {        
 
-  
+          console.log(rows);
+        res.render('pages/favorites',{
+            my_title: "reciMe",
+            data: rows
 
-    return task.batch([
-        task.any(query1)
+      })//rows
 
-    ]);
-})
-.then(data => {
-  
-
-console.log(data);
-
-res.render('pages/login.pug')
-
-})//data
-.catch(error => {
-    // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/team_stats',{
-      my_title: "Page Title Here",
-      result_1: '',
-      result_2: '',
-      result_3: ''
-    })
-});
+        })//then
+        .catch(function (err) {
+            // display error message in case an error
+            req.flash('error', err); //if this doesn't work for you replace with console.log
+            
+        })//catch     
 
 
 
@@ -364,43 +288,58 @@ var db_json=JSON.stringify(db_json);
 //after here. but i doubt it will matter
 var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('Aaron', '${db_json}');`;
    
-//db.query(add_favorite);
+db.query(add_favorite);
 
+db.any(query1)
 
-db.task('get-everything', task => {
+        .then(function (rows) {
 
-  
-
-    return task.batch([
-        task.any(query1)
-
-    ]);
-})
-.then(data => {
-  
-  console.log(data[0]);
- /* for(var i=0;i<data[0].length;i++){
-  console.log(data[0][i].recipe);
-
-}*/
+          //need to do query here to get
+        var url= `https://api.spoonacular.com/recipes/informationBulk?ids=715538,71642&${apiKey}`
 
 
 
-})//data
-.catch(error => {
-    // display error message in case an error
-        request.flash('error', err);
-        res.render('pages/team_stats',{
-      my_title: "Page Title Here",
-      result_1: '',
-      result_2: '',
-      result_3: ''
-    })
-});
 
+     fetch(url).then(response => {
+          return response.json();
+        })
+        .then(data =>{
+          console.log(data.recipes);
+      res.render('pages/home_page',{
+        my_title: "reciMe",
+        data: data.recipes
 
+      })
+        });//end fetch
+       /* res.render('pages/favorites',{
+            my_title: "reciMe",
+            data: rows
+
+      })//rows*/
+      
+
+        })//then
+        .catch(function (err) {
+            // display error message in case an error
+            req.flash('error', err); //if this doesn't work for you replace with console.log
+            
+        })//catch    
+             
 
 });//get
+
+//returns json. helper function
+async function getData(url){
+  const response = await fetch(url);
+  const data = await response.json();
+  return data;
+}
+
+async function getPostgres(query){
+  const data = await db.any(query1);
+  return data;
+ 
+}
 
 
 app.listen(3000);
