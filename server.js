@@ -6,12 +6,13 @@
   Body-Parser  - A tool to help use parse the data in a post request
   Pug          - A view engine for dynamically rendering HTML pages
   Pg-Promise   - A database tool to help use connect to our PostgreSQL database
+  express-session - Collects cookies for each session to store login information
 
 ***********************/
 const fs = require('fs');
 const express = require('express'); // Add the express framework has been added
 const session = require('express-session'); //add express session for password and username storing
-const cookieParser = require('cookie-parser');
+//const cookieParser = require('cookie-parser');
 let app = express();
 app.use(session({
   secret: "my_little_secret",
@@ -21,6 +22,12 @@ app.use(session({
 const bodyParser = require('body-parser'); // Add the body-parser tool has been added
 app.use(bodyParser.json());              // Add support for JSON encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // Add support for URL encoded bodies
+//used to dynamically render header
+app.use(function(req, res, next) {
+
+  res.locals.isLoggedIn = req.session.log;
+  next();
+});
 
 const pug = require('pug'); // Add the 'pug' view engine
 
@@ -176,9 +183,16 @@ app.get('/search', async function(req, res) {
 app.get('/login', async function(req, res) {
 
   res.render('pages/login',{
-  })
+  });
 
 });//get
+
+//logs user out when hitting logout button
+app.get('/log_out', function(req, res) {
+
+  req.session.destroy();
+  res.redirect('/');
+});
 
 //handles when user signs in
 app.post('/login', function(req, res) {
@@ -199,17 +213,20 @@ app.post('/login', function(req, res) {
               if(password == db_user_password){
                 req.session.pass = password;
                 req.session.user = user_name;
+                req.session.log = true;
                 suc = "Succesfully logged in!"
               }//inner if
             }//outer if
           }
-          console.log(req.session.user)
-          console.log(req.session.pass)
-          res.render('pages/login',{
-            my_title: "Saved Recipes",
-            d: suc
-          })
-
+          if(req.session.log == false){
+            res.render('pages/login',{
+              my_title: "Saved Recipes",
+              d: suc
+            })
+          }
+          else{
+            res.redirect('/');
+          }
         })
         .catch(function (err) {
             // display error message in case an error
@@ -217,7 +234,8 @@ app.post('/login', function(req, res) {
             console.log(req.session.user);
             console.log(req.session.pass);
             res.render('pages/saved_recipes', {
-                title: 'Saved Recipes'
+                title: 'Saved Recipes',
+                d: ''
             })
         })
 }); //post from login
@@ -256,7 +274,6 @@ app.get('/saved_recipes', function(req, res) {
       			my_title: "Favorite Recipes",
       			data: rows
       		})
-
       })
       .catch(function (err) {
         console.log('error', err);
@@ -334,12 +351,6 @@ async function getData(url){
   const response = await fetch(url);
   const data = await response.json();
   return data;
-}
-
-async function getPostgres(query){
-  const data = db.any(query);
-  return data;
-
 }
 
 function searchUsers(user, pass, data){

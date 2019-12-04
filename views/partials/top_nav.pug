@@ -165,8 +165,12 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           span.sr-only (current)
       li.nav-item
         a.nav-link(href='/saved_recipes') My Recipes
-      li.nav-item
-        a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
+      if(!isLoggedIn)
+        li.nav-item  
+          a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
+      if(isLoggedIn)
+        li.nav-item  
+          a.nav-link(href='/log_out') Log Out
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
       input.form-control.mr-sm-2(type='search' placeholder='Search' name="search")
       button.btn.btn-outline-success.my-2.my-sm-0(type='submit' onclick="this.form.submit()") Search
