@@ -13,7 +13,10 @@ const express = require('express'); // Add the express framework has been added
 const session = require('express-session'); //add express session for password and username storing
 const cookieParser = require('cookie-parser');
 let app = express();
-app.use(session({secret: "my_little_secret"}));
+app.use(session({
+  secret: "my_little_secret",
+  cookie: {path : '/'}
+}));
 
 const bodyParser = require('body-parser'); // Add the body-parser tool has been added
 app.use(bodyParser.json());              // Add support for JSON encoded bodies
@@ -92,14 +95,11 @@ function add_data_all(user){
 
 //renders home page when user puts in browser localhost:30000/
 app.get('/', async function(req, res) {
-
     var number = 2;
-    req.session.pass = "lit";
-    req.session.user = "Aaron";
+    //will need to change the below to login credentials
     //calls random recipe query on spoonacular
     //number sets amount of recipes returned
     var api_query = `https://api.spoonacular.com/recipes/random?number=${number}&${apiKey}`;
-
         /*returns json {recipes:
                                 [ recipejson,
                                   recipejson ] }
@@ -175,56 +175,57 @@ app.get('/search', async function(req, res) {
 //simply loads login page to get data from user
 app.get('/login', async function(req, res) {
 
-  var query1 = `SELECT * FROM users;`;
-  const users = await getPostgres(query1);
-
-res.render('pages/login',{
-  data:users
-
-      })
+  res.render('pages/login',{
+  })
 
 });//get
 
 //handles when user signs in
-app.post('/login', async function(req, res) {
-
-
-
+app.post('/login', function(req, res) {
 
   //get all users and passwords
   var query1 = `SELECT * FROM users;`;
-  const data = await getPostgres(query1);
-
   var password=req.body.password;
   var user_name=req.body.user_name;
 
+  db.any(query1)
+        .then(function (data) {
+          var suc = "The log-in info you have provided does not match.";
+          for(var i=0; i<data.length; i++){
+            var db_user = data[i].user_name;
+            var db_user_password = data[i].password;
+            if(user_name == db_user){
+              //verify entered passwrod matches db
+              if(password == db_user_password){
+                req.session.pass = password;
+                req.session.user = user_name;
+                suc = "Succesfully logged in!"
+              }//inner if
+            }//outer if
+          }
+          res.render('pages/login',{
+            my_title: "Saved Recipes",
+            d: suc
+          })
 
-var user_array=data[0];
-
-  //search array for user
-for(var i=0;i<user_array.length;i++){
-  var db_user = user_array[i].user_name;
-  var db_user_password = user_array[i].password;
-  if(user_name==db_user){
-    console.log("WE CAN NOW LOAD Favorite RECIPES");
-    //verify entered passwrod matches db
-    if(db_user_password==password){
-      console.log("password verified, yay we can log them in");
-    }//inner if
-  }//outer if
-}
+        })
+        .catch(function (err) {
+            // display error message in case an error
+            console.log(err)
+            console.log(req.session.user);
+            console.log(req.session.pass);
+            res.render('pages/saved_recipes', {
+                title: 'Saved Recipes'
+            })
+        })
+}); //post from login
 
 //will have to render recipe page
 //need to change topnav as well to remove signup
 //and change where favorite recipes links to
 //cannot edit headers after sent, so we may just want to remake pages with a different topNav
 //not sure about what best way to do this is. need to think for now.
-res.render('pages/favorites')
-
-
-
-
-});//post
+// res.render('pages/home_page')
 
 
 app.post('/sign_up', function(req, res) {
@@ -246,7 +247,9 @@ res.render('pages/login')
 
 app.get('/saved_recipes', function(req, res) {
 	var query = 'select * from users;';
+  //test of login cookies per session
   console.log(req.session.user);
+  console.log(req.session.pass);
 	db.any(query)
       .then(function (rows) {
           res.render('pages/saved_recipes',{
@@ -334,11 +337,32 @@ async function getData(url){
 }
 
 async function getPostgres(query){
-  const data = await db.any(query);
+  const data = db.any(query);
   return data;
 
 }
 
+function searchUsers(user, pass, data){
+  console.log("HERE")
+  for(var i=0; i<data.length; i++){
+    var db_user = data[i].user_name;
+    var db_user_password = data[i].password;
+
+    if(user == db_user){
+      console.log("WE CAN NOW LOAD Favorite RECIPES");
+      req.session.user = user;
+      console.log("WE CAN NOW LOAD Favorite RECIPES");
+      //verify entered passwrod matches db
+      if(pass==db_user_password){
+        req.session.pass = pass
+        console.log("password verified, yay we can log them in");
+        return true;
+      }//inner if
+    }//outer if
+
+  }
+  return false;
+}
 
 app.listen(3000);
 console.log('3000 is the magic port');
