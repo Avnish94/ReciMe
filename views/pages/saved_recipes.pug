@@ -1,28 +1,42 @@
 include ../partials/header.pug
 include ../partials/top_nav.pug
+link(rel='stylesheet', href='../../resources/css/hover_control.css')
 
 // saved recipes view
 .container
-  h1(align='center') My Saved Recipes
   br
-  .row
-    .col-3
-      #list-tab.list-group(role='tablist')
-        a#recipe-1-list.list-group-item.list-group-item-action.active(data-toggle='list', href='#recipe-1', role='tab') Ex. Recipe 1
-        a#recipe-2-list.list-group-item.list-group-item-action(data-toggle='list', href='#recipe-2', role='tab') Ex. Recipe 2
-        // - add more recipes here
-    .col-9
-      #nav-tabContent.tab-content
-        #recipe-1.tab-pane.fade.show.active(role='tabpanel')
-          img(src='../resources/images/burger.jpg', alt='recipe-1', height='300px')
-          br
-          | show recipe description
-          br
-          a(href='recipe_page.html') Click me for the recipe
-        #recipe-2.tab-pane.fade(role='tabpanel')
-          img(src='../resources/images/candy.jpg', alt='recipe-2', height='300px')
-          br
-          | show other recipe description
-        // - add more recipes here
+  if(data.length > 0)
+    .row
+      .col-3
+        #list-tab.list-group(role='tablist')
+          each recipe, index in data
+            if index == 0
+              a#recipe-1-list.list-group-item.list-group-item-action.active(data-toggle='list', href='#recipe-1', role='tab') #{recipe.recipe.title}
+            else
+              - var num = index+1
+              a(class = "list-group-item list-group-item-action", id = "recipe-"+num+"-list", data-toggle='list', href="#recipe-"+num, role='tab') #{recipe.recipe.title}
+          // - add more recipes here
+      .col-9
+        #nav-tabContent.tab-content
+          each recipe, index in data
+            if index == 0
+              -var num = index+1
+              #recipe-1.tab-pane.fade.show.active(role='tabpanel')
+                a(href='/recipe?recipe='+recipe.recipe.id style="display:block")
+                  img.image(src=recipe.recipe.image alt=recipe.recipe.title)
+                  .overlay(id ='overlay'+num onmouseover='hoverControl("overlay'+num+'")' onmouseout='hoverControlStop("overlay'+num+'")')
+                    text(id ='overlay'+num+'Text' name=recipe.recipe.title class="text")
+            else
+              -var num = index+1
+              div(class = 'tab-pane fade', id = "recipe-"+num, role='tabpanel')
+                a(href='/recipe?recipe='+recipe.recipe.id style="display:block")
+                  img.image(src=recipe.recipe.image alt=recipe.recipe.title)
+                  .overlay(id ='overlay'+num onmouseover='hoverControl("overlay'+num+'")' onmouseout='hoverControlStop("overlay'+num+'")')
+                    text(id ='overlay'+num+'Text' name=recipe.recipe.title class="text")
+
+              // - add more recipes here
+  else
+    h4(align='center') No Saved Recipes! But here's a puppy instead
+    center #[img(src='../resources/imgs/cute_puppy.jpg', alt='Cute Puppy', height='450px')]
 
 include ../partials/footer.pug

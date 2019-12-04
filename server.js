@@ -203,6 +203,8 @@ app.post('/login', function(req, res) {
               }//inner if
             }//outer if
           }
+          console.log(req.session.user)
+          console.log(req.session.pass)
           res.render('pages/login',{
             my_title: "Saved Recipes",
             d: suc
@@ -246,15 +248,13 @@ res.render('pages/login')
 });//post
 
 app.get('/saved_recipes', function(req, res) {
-	var query = 'select * from users;';
-  //test of login cookies per session
-  console.log(req.session.user);
-  console.log(req.session.pass);
+	var query = `SELECT recipe FROM favorites WHERE user_name = '${req.session.user}';`;
 	db.any(query)
       .then(function (rows) {
+        console.log(rows)
           res.render('pages/saved_recipes',{
       			my_title: "Favorite Recipes",
-      			data: rows,
+      			data: rows
       		})
 
       })
@@ -262,7 +262,7 @@ app.get('/saved_recipes', function(req, res) {
         console.log('error', err);
         res.render('pages/saved_recipes', {
           title: 'Favorited Recipes',
-          data: '',
+          data: ''
         })
       })
 });
