@@ -69,7 +69,7 @@ let db = pgp(dbConfig);
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 
-const apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145';
+const apiKey='apiKey=18ea56ebfa7440c7af5cd6faf4776fb5';
 
 
 function get_all_files(){
@@ -135,6 +135,11 @@ app.get('/recipe', async function(req, res) {
          const image = data.image;
          const health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
          const instructions = data.instructions;
+         req.session.image = image;
+         req.session.rec_id = data.id;
+         req.session.name = data.title;
+         // console.log(data.id)
+         // console.log(req.session.rec_id)
 
          //create smaller array ingredients for ease of use
          const tempIngredients = data.extendedIngredients;
@@ -156,7 +161,8 @@ app.get('/recipe', async function(req, res) {
         instructions: instructions,
         recipe_name: data.title,
         id: data.id,
-        data: data
+        data: data,
+        user: req.session.user
 
       })
 
@@ -284,67 +290,32 @@ app.get('/saved_recipes', function(req, res) {
       })
 });
 
-app.get('/favorite', async function(req, res) {
+app.post('/favorite', function(req, res) {
 
-  var query1 = `SELECT recipe FROM favorites;`;
-  var title = req.query.title;
-  var image = req.query.image;
-  var id = parseInt(req.query.recipe_id, 10);
-
-
-
-  //var user_name = GET USER NAME SOMEHOW
+  var title = req.session.name;
+  var image = req.session.image;
+  var id = req.session.rec_id;
+  var user_name = req.session.user;
 
   var db_json = {
     "id": id,
     "image": image,
     "title": title
-
   }
 
-var db_json=JSON.stringify(db_json);
+  var db_json=JSON.stringify(db_json);
 
-//still need to figure out how to get the user here as well. forced login is problably the way to go
-//Might need to make an async function or somethinfg here, but i dont think itll matter too much
-//but the data base takes time to insert things so we migth want to add a setTimeout or something for doing things
-//after here. but i doubt it will matter
-var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('Aaron', '${db_json}');`;
+  //still need to figure out how to get the user here as well. forced login is problably the way to go
+  //Might need to make an async function or somethinfg here, but i dont think itll matter too much
+  //but the data base takes time to insert things so we migth want to add a setTimeout or something for doing things
+  //after here. but i doubt it will matter
+  var add_favorite =`INSERT INTO favorites(user_name, recipe) VALUES ('${user_name}', '${db_json}');`;
 
-//db.query(add_favorite);
+  db.query(add_favorite, function (err, result) {
+    if (err) throw err;
+    })
 
-const favorite_recipes = await getPostgres(query1);
-
-//api query for getting recipe info bulk
-var url= `https://api.spoonacular.com/recipes/informationBulk?${apiKey}&ids=`;
-for(var i =0;i<favorite_recipes.length;i++){
-
-
-var id = favorite_recipes[i].recipe.id;
-
- //if recipe_id is the last one, dont add a comma after
-  if(i==favorite_recipes.length-1){
-  url = `${url}${id}`;
-  }
-  else{
-    url = `${url}${id},`;
-  }
-
-
-}//for loop
-console.log(url);
-
-const data= await getData(url);
-
- console.log(data);
-
-        res.render('pages/home_page',{
-        my_title: "reciMe",
-        data: data
-
-      })
-
-
-});//get
+});//post to db favorited recipe
 
 //returns json. helper function
 async function getData(url){
@@ -353,27 +324,6 @@ async function getData(url){
   return data;
 }
 
-function searchUsers(user, pass, data){
-  console.log("HERE")
-  for(var i=0; i<data.length; i++){
-    var db_user = data[i].user_name;
-    var db_user_password = data[i].password;
-
-    if(user == db_user){
-      console.log("WE CAN NOW LOAD Favorite RECIPES");
-      req.session.user = user;
-      console.log("WE CAN NOW LOAD Favorite RECIPES");
-      //verify entered passwrod matches db
-      if(pass==db_user_password){
-        req.session.pass = pass
-        console.log("password verified, yay we can log them in");
-        return true;
-      }//inner if
-    }//outer if
-
-  }
-  return false;
-}
 
 app.listen(3000);
 console.log('3000 is the magic port');
