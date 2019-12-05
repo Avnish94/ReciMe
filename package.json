@@ -1,0 +1,32 @@
+{
+  "name": "recime",
+  "version": "1.0.0",
+  "description": "a recipe website",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "cookie-parser": "^1.4.4",
+    "express-session": "^1.17.0",
+    "ejs-lint": "^0.3.0",
+    "jquery": "^3.4.1",
+    "node-fetch": "^2.6.0",
+    "pg-promise": "^9.3.3",
+    "pug": "^2.0.4",
+    "querystring": "^0.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Avnish94/All-project-code-components.git"
+  },
+  "author": "Ean, Avnish, Mohammed, Laura, Aaron, Johnny",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avnish94/All-project-code-components/issues"
+  },
+  "homepage": "https://github.com/Avnish94/All-project-code-components#readme"
+}
