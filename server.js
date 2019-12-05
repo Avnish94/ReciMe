@@ -65,10 +65,11 @@ const dbConfig = {
 
 let db = pgp(dbConfig);
 
-// set the view engine to ejs
+// set the view engine to pug
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 
+//spoonacular recipe apiKey
 const apiKey='apiKey=18ea56ebfa7440c7af5cd6faf4776fb5';
 
 
@@ -102,8 +103,7 @@ function add_data_all(user){
 
 //renders home page when user puts in browser localhost:30000/
 app.get('/', async function(req, res) {
-    var number = 2;
-    //will need to change the below to login credentials
+    var number = 8;
     //calls random recipe query on spoonacular
     //number sets amount of recipes returned
     var api_query = `https://api.spoonacular.com/recipes/random?number=${number}&${apiKey}`;
@@ -135,11 +135,10 @@ app.get('/recipe', async function(req, res) {
          const image = data.image;
          const health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
          const instructions = data.instructions;
+         //sets session data for use with favoriting recipes
          req.session.image = image;
          req.session.rec_id = data.id;
          req.session.name = data.title;
-         // console.log(data.id)
-         // console.log(req.session.rec_id)
 
          //create smaller array ingredients for ease of use
          const tempIngredients = data.extendedIngredients;
@@ -163,15 +162,14 @@ app.get('/recipe', async function(req, res) {
         id: data.id,
         data: data,
         user: req.session.user
-
-      })
+      }) //provides all info of api to rendered page
 
 }); //end get request
 
 app.get('/search', async function(req, res) {
 
   var search =req.query.search;
-  var number = 4;
+  var number = 8;
 
   //api call based on string entered by user
   var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;

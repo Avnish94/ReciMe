@@ -11,19 +11,22 @@ function hoverControl(overlayId){
 
 	var recipeName = textDisplay.getAttribute("name");
 
-
+	if(healthScore == undefined){
+		overlay.style.backgroundColor = "#3c8f76";
+		overlay.style.opacity = .70;
+	}
 	//changes color of overlay based on health value
-	if (healthScore>50){
-		overlay.style.backgroundColor="green";
+	else if (healthScore>50){
+		overlay.style.backgroundColor="#5aa614";
 		overlay.style.opacity=0.75;
 
 	}
 	else if(healthScore<25){
-		overlay.style.backgroundColor="red";
+		overlay.style.backgroundColor="#b52826";
 		overlay.style.opacity=0.75;
 	}
 	else{
-		overlay.style.backgroundColor="yellow";
+		overlay.style.backgroundColor="#bab82d";
 		overlay.style.opacity=0.5;
 	}
 
@@ -41,8 +44,13 @@ $(function() {
     $('#favorite').submit(function(event) {
         event.preventDefault(); // Stops browser from navigating away from page
 				alert("Saved to your favorites!")
-        // build a json object or do something with the form, store in data
         $.post('/favorite', function(resp) {
         });
     });
+});
+
+//sets navbar active item
+$(document).ready(function() {
+  $('li.active').removeClass('active');
+  $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
 });

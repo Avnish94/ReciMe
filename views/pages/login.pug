@@ -1,5 +1,10 @@
 include ../partials/header.pug
 include ../partials/top_nav.pug
+style.
+  #sign_up_form{
+    width: 300px;
+    margin: 0 auto;
+  }
 
 form#sign_up_form(action='/login' method='post')
   .form-group

@@ -1,6 +1,6 @@
 style.
   input[type=text], select {
-  width: 70%;
+  width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -136,6 +136,9 @@ style.
   display: inline-block;
   margin: 100px auto;
   }
+  .dropdown {
+    margin-right: 8px;
+  }
   /* Style all input fields */
   input {
   width: 100%;
@@ -182,6 +185,9 @@ style.
   left: -35px;
   content: '\00D7';
   }
+  #searchbar {
+    margin-top: 16px;
+  }
 
 #myModal.modal.fade
   .modal-dialog.modal-login
@@ -225,7 +231,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a.nav-link(href='/saved_recipes') My Recipes
       if(!isLoggedIn)
         li.nav-item  
-          a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
+          a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up / Log In
       if(isLoggedIn)
         li.nav-item  
           a.nav-link(href='/log_out') Log Out
@@ -268,7 +274,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       }
     
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
-      input.form-control.mr-sm-2(type='search' placeholder='Search' name="search")
+      input.form-control.mr-sm-2(type='search' placeholder='Search' name="search", id = "searchbar")
       button.btn.btn-outline-success.my-2.my-sm-0(type='submit' onclick="this.form.submit()") Search
 
 

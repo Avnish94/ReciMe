@@ -2,7 +2,11 @@ include ../partials/header.pug
 include ../partials/top_nav.pug
 link(rel='stylesheet', href='../../resources/css/hover_control.css')
 
-
+style.
+  .overlay{
+    background-color = "mint";
+    opacity = .5;
+  }
 #grid.wrapper
   if(data)
     each val, i in data
@@ -11,4 +15,5 @@ link(rel='stylesheet', href='../../resources/css/hover_control.css')
           img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
           .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
             text(id ='overlay'+i+'Text' name=val.title class="text")
+            
 include ../partials/footer.pug
