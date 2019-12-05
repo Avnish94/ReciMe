@@ -67,8 +67,9 @@ style.
           td=val.name
           td=`${val.amount} ${val.unit}`
   .favorite
-    a(href=`/favorite?title=${recipe_name}&image=${image}&recipe_id=${id}` style="display:block")
-      button#favorite.btn.btn-primary.btn-block.login-btn(type='submit') Favorite
+    form(action = '/favorite', method = 'post')
+      a(style="display:block")
+        button#favorite.btn.btn-primary.btn-block.login-btn(type='submit') Favorite
   .picture
     img.image(src=image)
     .header
