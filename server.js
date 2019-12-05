@@ -16,7 +16,9 @@ const session = require('express-session'); //add express session for password a
 let app = express();
 app.use(session({
   secret: "my_little_secret",
-  cookie: {path : '/'}
+  cookie: {path : '/'},
+  resave: false,
+  saveUninitialized: false
 }));
 
 const bodyParser = require('body-parser'); // Add the body-parser tool has been added
@@ -70,7 +72,7 @@ app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 
 //spoonacular recipe apiKey
-const apiKey='apiKey=18ea56ebfa7440c7af5cd6faf4776fb5';
+const apiKey='apiKey=52438c885f824afe8e7043a4ca49d076';
 
 
 function get_all_files(){
@@ -175,7 +177,6 @@ app.get('/search', async function(req, res) {
   var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;
 
   const data = await getData(api_query);
-
         res.render('pages/search',{
         my_title: "reciMe",
         data: data.results
