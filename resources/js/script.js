@@ -13,7 +13,7 @@ function hoverControl(overlayId){
 
 
 	//changes color of overlay based on health value
-	if (healthScore>75){
+	if (healthScore>50){
 		overlay.style.backgroundColor="green";
 		overlay.style.opacity=0.75;
 
@@ -36,6 +36,7 @@ function hoverControlStop(overlayId){
 	overlay.style.opacity=0;
 }
 
+//function for favoriting recipes so the page doesn't need to reload
 $(function() {
     $('#favorite').submit(function(event) {
         event.preventDefault(); // Stops browser from navigating away from page
