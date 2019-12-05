@@ -16,18 +16,11 @@ style.
   grid-row-end: 4;
   overflow: auto;
   }
-  .favorite{
-  grid-column-start: 1;
-  grid-column-end: 2;
-  grid-row-start: 4;
-  grid-row-end: 5;
-  }
   .picture {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 3;
-  overflow:auto;
+  grid-row-end: 4;
 
   }
   .health{
@@ -38,16 +31,11 @@ style.
 
   }
   .instruction{
-  grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 4;
   grid-row-start: 4;
   grid-row-end: 5;
-  }
-  .image {
-  max-width: 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
+  margin-top: 20px;
   }
   .header {
   padding: 60px;
@@ -66,19 +54,19 @@ style.
         tr
           td=val.name
           td=`${val.amount} ${val.unit}`
-  .favorite
-    form(id= 'favorite' action = '/favorite', method = 'get')
-      a(style="display:block")
-        if(user == undefined)
-          button#btn.btn-primary.btn-block.login-btn(type='submit', disabled, style = 'background-color: grey') Favorite
-        else
-          button#btn.btn-primary.btn-block.login-btn(type='submit') Favorite
   .picture
-    img.image(src=image)
     .header
       h1=recipe_name
+    img.image(src=image)
+    .favorite
+      form(id= 'favorite' action = '/favorite', method = 'get')
+        a(style="display:block")
+          if(user == undefined)
+            button#btn.btn-primary.btn-block.login-btn(type='submit', disabled, style = 'background-color: grey') Favorite
+          else
+            button#btn.btn-primary.btn-block.login-btn(type='submit') Favorite
   .health
-    iframe(src=health_info width="500px" height="820px")
+    iframe(src=health_info width="500px" height="820px" frameBorder="0")
   .instruction
     p=instructions
 
