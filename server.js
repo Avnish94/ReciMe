@@ -130,18 +130,18 @@ app.get('/recipe', async function(req, res) {
   var recipe_id= req.query.recipe;
 
   //gets one recipe json
-  var api_query = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`;
+  var api_query1 = `https://api.spoonacular.com/recipes/${recipe_id}/information?${apiKey}`;
 
-  const data = await getData(api_query);
+  const data = await getData(api_query1);
 
-         const image = data.image;
+         const image = data.image
          const health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
-         const instructions = getData(`https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?${apiKey}`);
+         //const instr = data.analyzedInstructions;
+         const instr = data.instructions;
          //sets session data for use with favoriting recipes
          req.session.image = image;
          req.session.rec_id = data.id;
          req.session.name = data.title;
-         console.log(instructions);
 
          //create smaller array ingredients for ease of use
          const tempIngredients = data.extendedIngredients;
@@ -154,13 +154,12 @@ app.get('/recipe', async function(req, res) {
          }
           }//for loop
 
-
       res.render('pages/recipe_page',{
         my_title: "reciMe",
         health_info: health_info,
         ingredients: ingredients,
         image: image,
-        instructions: instructions,
+        instructions: instr,
         recipe_name: data.title,
         id: data.id,
         data: data,
@@ -242,7 +241,7 @@ app.post('/exclude', async function(req, res) {
 
   for(ingredient in exclude){
     search= `${search}${ingredient},`
-    
+
   }
   search = search.slice(0, -1);
 

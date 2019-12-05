@@ -243,12 +243,6 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a(href='/type?search=main course') Main Course
         a(href='/type?search=dessert') Dessert
         form(action='/action_page.php')
-        label(for='min') Minimum Healthiness
-        br
-        input#min(type='text', name='firstname', placeholder='Minimum')
-        label(for='max') Maximum Healthiness
-        input#max(type='text', name='firstname', placeholder='Maximum')
-        br
         button.dropbtn(onclick='cuisine()')  Cuisine
         #cuisineDropdown.dropdown-content
           a#Italian(href='/cuisine?search=Italian') Italian
@@ -263,6 +257,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a#Thai(href='/cuisine?search=Thai') Thai
           a#Vietnamese(href='/cuisine?search=Vietnamese') Vietnamese
         br
+        br
         button.dropbtn(onclick='diet()')  Diet
         #dietDropdown.dropdown-content
           a#Vegetarian(href='/diet?search=Vegetarian') Vegetarian
@@ -272,6 +267,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
           a#Pescetarian(href='/diet?search=Pescetarian') Pescetarian
           a#Paleo(href='/diet?search=Paleo') Paleo
           a#Primal(href='/diet?search=Primal') Primal
+        br
         br
         button.dropbtn(onclick='allergy()')  Allergies (Exclude)
         #allergyDropdown.dropdown-content
