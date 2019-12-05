@@ -238,9 +238,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     .dropdown
       button.dropbtn(onclick='myFunction()') Advanced Search
       #myDropdown.dropdown-content
-        a(href='#breakfast') Breakfast
-        a(href='#lunch') Lunch
-        a(href='#dinner') Dinner
+        a(href='/type?search=breakfast') Breakfast
+        a(href='/type?search=appetizer') Appetizer
+        a(href='/type?search=main course') Main Course
+        a(href='/type?search=dessert') Dessert
         form(action='/action_page.php')
         label(for='min') Minimum Healthiness
         br
