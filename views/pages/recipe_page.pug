@@ -5,7 +5,7 @@ style.
   .parent{
   display: grid;
   grid-template-columns:  repeat(3, 3fr);
-  grid-template-rows: 500px 500px;
+  grid-template-rows: 50px;
   background-color: white ;
   grid-auto-flow: row;
   }
@@ -13,14 +13,20 @@ style.
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-end: 4;
   overflow: auto;
+  }
+  .favorite{
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 4;
+  grid-row-end: 5;
   }
   .picture {
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
-  grid-row-end: 2;
+  grid-row-end: 3;
   overflow:auto;
 
   }
@@ -28,14 +34,14 @@ style.
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 3;
-  
+  grid-row-end: 5;
+
   }
   .instruction{
-  grid-column-start: 1;
+  grid-column-start: 2;
   grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
+  grid-row-start: 4;
+  grid-row-end: 5;
   }
   .image {
   max-width: 100%;
@@ -60,14 +66,15 @@ style.
         tr
           td=val.name
           td=`${val.amount} ${val.unit}`
-  .picture
-    .header
-      h1=recipe_name
-    img.image(src=image)
+  .favorite
     a(href=`/favorite?title=${recipe_name}&image=${image}&recipe_id=${id}` style="display:block")
       button#favorite.btn.btn-primary.btn-block.login-btn(type='submit') Favorite
+  .picture
+    img.image(src=image)
+    .header
+      h1=recipe_name
   .health
-    iframe(src=health_info width="1000px" height="1000px")
+    iframe(src=health_info width="500px" height="820px")
   .instruction
     p=instructions
 
