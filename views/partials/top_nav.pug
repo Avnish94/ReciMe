@@ -22,7 +22,7 @@ style.
   background-color: #45a049;
   }
   .dropbtn {
-  background-color: #3468DB;
+  background-color: #4CAF50;
   height: 40px;
   color: white;
   top:2px;
@@ -34,7 +34,7 @@ style.
   
   }
   .dropbtn:hover, .dropbtn:focus {
-  background-color: #2980B9;
+  background-color: #409E3A;
   }
   .dropdown {
   position: relative;
@@ -249,6 +249,11 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       }
       // Close the dropdown if the user clicks outside of it
       window.onclick = function(event) {
+      console.log(event.target.id);
+      if(event.target.id=='min' || event.target.id=='max')
+      {
+      }
+      else {
       if (!event.target.matches('.dropbtn')) {
       var dropdowns = document.getElementsByClassName("dropdown-content");
       var i;
@@ -256,6 +261,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
       openDropdown.classList.remove('show');
+      }
       }
       }
       }
