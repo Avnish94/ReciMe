@@ -1,25 +1,10 @@
 include ../partials/header.pug
 include ../partials/top_nav.pug
-head
-  
+
 style.
   .col{
   margin:0px;
   padding: 0px;
-  }
-    .parent{
-  display: grid;
-  grid-template-columns:  repeat(3, 3fr);
-  grid-template-rows: 500px 500px;
-  background-color: white ;
-  grid-auto-flow: row;
-  }
-  .checkboxes {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  overflow: auto;
   }
   .wrapper {
   display: grid;
@@ -29,8 +14,6 @@ style.
   grid-auto-flow: row;
   }
   .image {
-  grid-column-start: 5;
-  grid-column-end: 6;
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -57,150 +40,15 @@ style.
   left: 50%;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
-  
   }
-  .container {
-      display: block;
-      position: relative;
-      padding-left: 35px;
-      margin-bottom: 12px;
-      cursor: pointer;
-      font-size: 22px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      }
-      .container input {
-      position: absolute;
-      opacity: 0;
-      cursor: pointer;
-      height: 0;
-      width: 0;
-      }
-      .checkmark {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 25px;
-      width: 25px;
-      background-color: #eee;
-      }
-      .container:hover input ~ .checkmark {
-      background-color: #ccc;
-      }
-      .container input:checked ~ .checkmark {
-      background-color: #29A51F;
-      }
-      .checkmark:after {
-      content: "";
-      position: absolute;
-      display: none;
-      }
-      .container input:checked ~ .checkmark:after {
-      display: block;
-      }
-      .container .checkmark:after {
-      left: 9px;
-      top: 5px;
-      width: 5px;
-      height: 10px;
-      border: solid white;
-      border-width: 0 3px 3px 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
-      }
-  
-body
-  .parent
-    .checkboxes
-      label.container
-        | Breakfast
-        input(type='checkbox', checked='checked')
-        span.checkmark
-      label.container
-        | Lunch
-        input(type='checkbox')
-        span.checkmark
-      label.container
-        | Dinner
-        input(type='checkbox')
-        span.checkmark
-      p1 Minimum
-        form
-          label.radio-inline
-            input(type='radio', name='optradio', checked='')
-            | 1
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 2
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 3
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 4
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 5
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 6
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 7
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 8
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 9
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 10
 
-      .container
-      p1 Maximum
-        form
-          label.radio-inline
-            input(type='radio', name='optradio', checked='')
-            | 1
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 2
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 3
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 4
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 5
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 6
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 7
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 8
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 9
-          label.radio-inline
-            input(type='radio', name='optradio')
-            | 10
-  #grid.wrapper
-    .image
-    if(data)
-      each val, i in data
-        .col
-          a(href='/recipe?recipe='+val.id style="display:block")
-            img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
-            .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
-              text(id ='overlay'+i+'Text' name=val.title class="text")
-  include ../partials/footer.pug
+#grid.wrapper
+  if(data)
+    each val, i in data
+      .col
+        a(href='/recipe?recipe='+val.id style="display:block")
+          img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
+          .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
+            text(id ='overlay'+i+'Text' name=val.title class="text")
+include ../partials/footer.pug
 
