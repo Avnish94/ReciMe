@@ -44,7 +44,7 @@ style.
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 160px;
+  min-width: 300px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -247,30 +247,80 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         input#min(type='text', name='firstname', placeholder='Minimum')
         label(for='max') Maximum Healthiness
         input#max(type='text', name='firstname', placeholder='Maximum')
+        br
+        button.dropbtn(onclick='cuisine()')  Cuisine
+        #cuisineDropdown.dropdown-content
+          a#Italian(href='#breakfast') Italian
+          a#Indian(href='#Indian') Indian
+          a#Japanese(href='#Japanese') Japanese
+          a#Greek(href='#Greek') Greek
+          a#German(href='#German') German
+          a#Korean(href='#Korean') Korean
+          a#Mexican(href='#Mexican') Mexican
+          a#Mediteranean(href='#Mediteranean') Mediteranean
+          a#Spanish(href='#Spanish') Spanish
+          a#Thai(href='#Thai') Thai
+          a#Vietnamese(href='#Vietnamese') Vietnamese
+        br
+        button.dropbtn(onclick='diet()')  Diet
+        #dietDropdown.dropdown-content
+          a#Vegetarian(href='#Vegetarian') Vegetarian
+          a#Vegan(href='#Vegan') Vegan
+          a#GlutenFree(href='#GlutenFree') Gluten Free
+          a#Ketogenic(href='#Ketogenic') Ketogenic
+          a#Pescetarian(href='#Pescetarian') Pescetarian
+          a#Paleo(href='#Paleo') Paleo
+          a#Primal(href='#Primal') Primal
+        br
+        button.dropbtn(onclick='allergy()')  Allergies (Exclude)
+        #allergyDropdown.dropdown-content
+          a#Dairy(href='#Dairy') Dairy
+          a#Vegan(href='#Egg') Egg
+          a#Peanut(href='#Peanut') Peanut
+          a#SeaFood(href='#SeaFood') Sea Food
+          a#Shellfish(href='#Shellfish') Shellfish
+          a#Soy(href='#Soy') Soy
+          a#Wheat(href='#Wheat') Wheat
+          a#Gluten(href='#Gluten') Gluten
+          a#Grain(href='#Grain') Grain
+          a#Sesame(href='#Sesame') Sesame
+          a#TreeNut(href='#TreeNut') Tree Nut
+        br
+        button(onclick='myFunction()') Submit
+        
     script.
       /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */
       function myFunction() {
       document.getElementById("myDropdown").classList.toggle("show");
       }
+      function cuisine() {
+      document.getElementById("cuisineDropdown").classList.toggle("show");
+      }
+      function diet() {
+      document.getElementById("dietDropdown").classList.toggle("show");
+      }
+      function allergy() {
+      document.getElementById("allergyDropdown").classList.toggle("show");
+      }
       // Close the dropdown if the user clicks outside of it
       window.onclick = function(event) {
       console.log(event.target.id);
-      if(event.target.id=='min' || event.target.id=='max')
-      {
-      }
-      else {
-      if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-      }
-      }
-      }
-      }
+      //- if(event.target.id=='min' || event.target.id=='max')
+      //- {
+      //- }
+      //- else {
+      //- if (!event.target.matches('.dropbtn')) {
+      //- var dropdowns = document.getElementsByClassName("dropdown-content");
+      //- var i;
+      //- for (i = 0; i < dropdowns.length; i++) {
+      //- var openDropdown = dropdowns[i];
+      //- if (openDropdown.classList.contains('show')) {
+      //- openDropdown.classList.remove('show');
+      //- }
+      //- }
+      //- }
+      //- }
       }
     
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
