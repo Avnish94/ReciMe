@@ -1,11 +1,25 @@
 include ../partials/header.pug
 include ../partials/top_nav.pug
-
+head
+  
 style.
-
   .col{
   margin:0px;
   padding: 0px;
+  }
+    .parent{
+  display: grid;
+  grid-template-columns:  repeat(3, 3fr);
+  grid-template-rows: 500px 500px;
+  background-color: white ;
+  grid-auto-flow: row;
+  }
+  .checkboxes {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  overflow: auto;
   }
   .wrapper {
   display: grid;
@@ -15,6 +29,8 @@ style.
   grid-auto-flow: row;
   }
   .image {
+  grid-column-start: 5;
+  grid-column-end: 6;
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -95,29 +111,96 @@ style.
       -ms-transform: rotate(45deg);
       transform: rotate(45deg);
       }
-      
+  
 body
-    br
-    br
-    label.container
-      | Breakfast
-      input(type='checkbox', checked='checked')
-      span.checkmark
-    label.container
-      | Lunch
-      input(type='checkbox')
-      span.checkmark
-    label.container
-      | Dinner
-      input(type='checkbox')
-      span.checkmark
-#grid.wrapper
-  if(data)
-    each val, i in data
-      .col
-        a(href='/recipe?recipe='+val.id style="display:block")
-          img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
-          .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
-            text(id ='overlay'+i+'Text' name=val.title class="text")
-include ../partials/footer.pug
+  .parent
+    .checkboxes
+      label.container
+        | Breakfast
+        input(type='checkbox', checked='checked')
+        span.checkmark
+      label.container
+        | Lunch
+        input(type='checkbox')
+        span.checkmark
+      label.container
+        | Dinner
+        input(type='checkbox')
+        span.checkmark
+      p1 Minimum
+        form
+          label.radio-inline
+            input(type='radio', name='optradio', checked='')
+            | 1
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 2
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 3
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 4
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 5
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 6
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 7
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 8
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 9
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 10
+
+      .container
+      p1 Maximum
+        form
+          label.radio-inline
+            input(type='radio', name='optradio', checked='')
+            | 1
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 2
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 3
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 4
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 5
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 6
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 7
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 8
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 9
+          label.radio-inline
+            input(type='radio', name='optradio')
+            | 10
+  #grid.wrapper
+    .image
+    if(data)
+      each val, i in data
+        .col
+          a(href='/recipe?recipe='+val.id style="display:block")
+            img.image(src=`https://spoonacular.com/recipeImages/${val.id}-556x370.jpg` alt=val.title)
+            .overlay(id ='overlay'+i onmouseover='hoverControl("overlay'+i+'")' onmouseout='hoverControlStop("overlay'+i+'")' health=val.healthScore)
+              text(id ='overlay'+i+'Text' name=val.title class="text")
+  include ../partials/footer.pug
 
