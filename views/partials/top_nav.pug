@@ -274,19 +274,26 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         br
         button.dropbtn(onclick='allergy()')  Allergies (Exclude)
         #allergyDropdown.dropdown-content
-          a#Dairy(href='#Dairy') Dairy
-          a#Vegan(href='#Egg') Egg
-          a#Peanut(href='#Peanut') Peanut
-          a#SeaFood(href='#SeaFood') Sea Food
-          a#Shellfish(href='#Shellfish') Shellfish
-          a#Soy(href='#Soy') Soy
-          a#Wheat(href='#Wheat') Wheat
-          a#Gluten(href='#Gluten') Gluten
-          a#Grain(href='#Grain') Grain
-          a#Sesame(href='#Sesame') Sesame
-          a#TreeNut(href='#TreeNut') Tree Nut
-        br
-        button(onclick='myFunction()') Submit
+          form#search_form(action='/exclude' method='post')
+            .form-group
+              p Dairy
+                input#dairy(name='dairy' type='checkbox' value="vegan" required='required')
+              p Vegan
+                input#vegan(name ='egg' value="egg" type='checkbox' required='required')
+              p Peanut
+                input#vegan(name ='peanut' type='checkbox' value="peanut" required='required')
+              p Seafood
+                input#dairy(name='seafood' type='checkbox' value="seafood" required='required')
+              p Shellfish
+                input#vegan(name= 'shellfish' type='checkbox' value="shellfish" required='required')
+              p Soy
+                input#vegan(name='soy' type='checkbox' value="soy" required='required')
+              p Wheat
+                input#vegan(name= 'wheat' type='checkbox' value="wheat" required='required')
+              p Gluten
+                input#vegan(name='gluten' type='checkbox' value="gluten" required='required')
+            .form-group
+              button#my_submit_button.btn.btn-primary.btn-block.login-btn(type='submit' onclick='this.form.submit()') Search
         
     script.
       /* When the user clicks on the button,

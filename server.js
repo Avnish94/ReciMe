@@ -216,6 +216,30 @@ app.get('/diet', async function(req, res) {
 
 }); //end get request
 
+app.post('/exclude', async function(req, res) {
+
+  var exclude = req.body;
+
+  var search='';
+  var number = 8;
+
+  for(ingredient in exclude){
+    search= `${search}${ingredient},`
+    
+  }
+  search = search.slice(0, -1);
+
+  //api call based on string entered by user
+  var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&excludeIngredients=${search}&${apiKey}`;
+
+  const data = await getData(api_query);
+        res.render('pages/search',{
+        my_title: "reciMe",
+        data: data.results
+      })
+
+}); //end get request
+
 //simply loads login page to get data from user
 app.get('/login', async function(req, res) {
 
