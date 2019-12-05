@@ -174,6 +174,22 @@ app.get('/search', async function(req, res) {
   var number = 8;
 
   //api call based on string entered by user
+  var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&cuisine=${search}&${apiKey}`;
+
+  const data = await getData(api_query);
+        res.render('pages/search',{
+        my_title: "reciMe",
+        data: data.results
+      })
+
+}); //end get request
+
+app.get('/cuisine', async function(req, res) {
+
+  var search =req.query.search;
+  var number = 8;
+
+  //api call based on string entered by user
   var api_query = `https://api.spoonacular.com/recipes/search?number=${number}&query=${search}&${apiKey}`;
 
   const data = await getData(api_query);
