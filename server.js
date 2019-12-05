@@ -210,6 +210,7 @@ app.post('/login', function(req, res) {
 
   db.any(query1)
         .then(function (data) {
+          req.session.log = false;
           var suc = "The log-in info you have provided does not match.";
           for(var i=0; i<data.length; i++){
             var db_user = data[i].user_name;
@@ -237,8 +238,6 @@ app.post('/login', function(req, res) {
         .catch(function (err) {
             // display error message in case an error
             console.log(err)
-            console.log(req.session.user);
-            console.log(req.session.pass);
             res.render('pages/saved_recipes', {
                 title: 'Saved Recipes',
                 d: ''
@@ -275,7 +274,6 @@ app.get('/saved_recipes', function(req, res) {
 	var query = `SELECT recipe FROM favorites WHERE user_name = '${req.session.user}';`;
 	db.any(query)
       .then(function (rows) {
-        console.log(rows)
           res.render('pages/saved_recipes',{
       			my_title: "Favorite Recipes",
       			data: rows
