@@ -136,11 +136,12 @@ app.get('/recipe', async function(req, res) {
 
          const image = data.image;
          const health_info = `https://api.spoonacular.com/recipes/${recipe_id}/nutritionWidget?defaultCss=true&${apiKey}`;
-         const instructions = data.instructions;
+         const instructions = getData(`https://api.spoonacular.com/recipes/${recipe_id}/analyzedInstructions?${apiKey}`);
          //sets session data for use with favoriting recipes
          req.session.image = image;
          req.session.rec_id = data.id;
          req.session.name = data.title;
+         console.log(instructions);
 
          //create smaller array ingredients for ease of use
          const tempIngredients = data.extendedIngredients;
