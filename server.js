@@ -54,14 +54,7 @@ const fetch = require("node-fetch");
 
 // REMEMBER to chage the password
 
-var password='toor';
-const dbConfig = {
-	host: 'localhost',
-	port: 5432,
-	database: 'recipe_db',
-	user: 'postgres',
-	password: password
-};
+const dbConfig = process.env.DATABASE_URL;
 
 let db = pgp(dbConfig);
 
