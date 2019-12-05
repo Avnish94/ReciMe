@@ -1,4 +1,62 @@
 style.
+  input[type=text], select {
+  width: 70%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  }
+  input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  }
+  input[type=submit]:hover {
+  background-color: #45a049;
+  }
+  .dropbtn {
+  background-color: #3468DB;
+  height: 40px;
+  color: white;
+  top:2px;
+  padding: 6px 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  
+  }
+  .dropbtn:hover, .dropbtn:focus {
+  background-color: #2980B9;
+  }
+  .dropdown {
+  position: relative;
+  display: inline-block;
+  }
+  .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  }
+  .dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  }
+  .dropdown a:hover {background-color: #ddd;}
+  .show {display: block;}
   .modal-login {
   color: #636363;
   width: 350px;
@@ -167,10 +225,42 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
         a.nav-link(href='/saved_recipes') My Recipes
       if(!isLoggedIn)
         li.nav-item  
-          a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up / Log In
+          a.nav-link(href='#myModal' data-toggle='modal' onclick='openModal()') Sign Up
       if(isLoggedIn)
         li.nav-item  
           a.nav-link(href='/log_out') Log Out
+    .dropdown
+      button.dropbtn(onclick='myFunction()') Advanced Search
+      #myDropdown.dropdown-content
+        a(href='#breakfast') Breakfast
+        a(href='#lunch') Lunch
+        a(href='#dinner') Dinner
+        form(action='/action_page.php')
+        label(for='min') Minimum Healthiness
+        br
+        input#min(type='text', name='firstname', placeholder='Minimum')
+        label(for='max') Maximum Healthiness
+        input#max(type='text', name='firstname', placeholder='Maximum')
+    script.
+      /* When the user clicks on the button,
+      toggle between hiding and showing the dropdown content */
+      function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+      }
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+      }
+      }
+      }
+      }
+    
     form.form-inline.my-2.my-lg-0(action="/search" method="get")
       input.form-control.mr-sm-2(type='search' placeholder='Search' name="search")
       button.btn.btn-outline-success.my-2.my-sm-0(type='submit' onclick="this.form.submit()") Search
