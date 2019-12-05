@@ -36,4 +36,12 @@ function hoverControlStop(overlayId){
 	overlay.style.opacity=0;
 }
 
-
+$(function() {
+    $('#favorite').submit(function(event) {
+        event.preventDefault(); // Stops browser from navigating away from page
+				alert("Saved to your favorites!")
+        // build a json object or do something with the form, store in data
+        $.post('/favorite', function(resp) {
+        });
+    });
+});

@@ -67,9 +67,12 @@ style.
           td=val.name
           td=`${val.amount} ${val.unit}`
   .favorite
-    form(action = '/favorite', method = 'post')
+    form(id= 'favorite' action = '/favorite', method = 'get')
       a(style="display:block")
-        button#favorite.btn.btn-primary.btn-block.login-btn(type='submit') Favorite
+        if(user == undefined)
+          button#btn.btn-primary.btn-block.login-btn(type='submit', disabled, style = 'background-color: grey') Favorite
+        else
+          button#btn.btn-primary.btn-block.login-btn(type='submit') Favorite
   .picture
     img.image(src=image)
     .header

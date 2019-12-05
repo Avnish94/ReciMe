@@ -69,7 +69,7 @@ let db = pgp(dbConfig);
 app.set('view engine', 'pug');
 app.use(express.static(__dirname + '/')); // This line is necessary for us to use relative paths and access our resources directory
 
-const apiKey='apiKey=bc4bf97a26b6451f8265794ecb32f145';
+const apiKey='apiKey=18ea56ebfa7440c7af5cd6faf4776fb5';
 
 
 function get_all_files(){
@@ -138,8 +138,8 @@ app.get('/recipe', async function(req, res) {
          req.session.image = image;
          req.session.rec_id = data.id;
          req.session.name = data.title;
-         console.log(data.id)
-         console.log(req.session.rec_id)
+         // console.log(data.id)
+         // console.log(req.session.rec_id)
 
          //create smaller array ingredients for ease of use
          const tempIngredients = data.extendedIngredients;
@@ -161,7 +161,8 @@ app.get('/recipe', async function(req, res) {
         instructions: instructions,
         recipe_name: data.title,
         id: data.id,
-        data: data
+        data: data,
+        user: req.session.user
 
       })
 
@@ -300,7 +301,6 @@ app.post('/favorite', function(req, res) {
     "id": id,
     "image": image,
     "title": title
-
   }
 
   var db_json=JSON.stringify(db_json);
@@ -313,8 +313,8 @@ app.post('/favorite', function(req, res) {
 
   db.query(add_favorite, function (err, result) {
     if (err) throw err;
-    res.send(alert("favorited"));
-  })
+    })
+
 });//post to db favorited recipe
 
 //returns json. helper function
@@ -324,27 +324,6 @@ async function getData(url){
   return data;
 }
 
-function searchUsers(user, pass, data){
-  console.log("HERE")
-  for(var i=0; i<data.length; i++){
-    var db_user = data[i].user_name;
-    var db_user_password = data[i].password;
-
-    if(user == db_user){
-      console.log("WE CAN NOW LOAD Favorite RECIPES");
-      req.session.user = user;
-      console.log("WE CAN NOW LOAD Favorite RECIPES");
-      //verify entered passwrod matches db
-      if(pass==db_user_password){
-        req.session.pass = pass
-        console.log("password verified, yay we can log them in");
-        return true;
-      }//inner if
-    }//outer if
-
-  }
-  return false;
-}
 
 app.listen(3000);
 console.log('3000 is the magic port');
