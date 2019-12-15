@@ -1,3 +1,5 @@
+// use npm test to run test files
+
 var Request = require("request");
 
 describe("Server", () => {
@@ -5,16 +7,13 @@ describe("Server", () => {
     beforeAll(() => {
         server = require("../server");
     });
-    // afterAll(() => {
-    //     server.close();
-    // });
+
     describe("GET /", () => {
         var data = {};
         beforeAll((done) => {
             Request.get("http://localhost:3000", (error, response, body) => {
                 data.status = response.statusCode;
                 data.body = body;
-                console.log(data)
                 done();
             });
         });
@@ -22,23 +21,25 @@ describe("Server", () => {
             expect(data.status).toBe(200);
         });
         it("Body", () => {
+            // If homepage does not render any jpg images then there is an error
             expect(data.body.includes("jpg")).toEqual(true);
         });
       });
-    // describe("GET /homepage", () => {
-    //     var data = {};
-    //     beforeAll((done) => {
-    //         Request.get("http://localhost:3000/test", (error, response, body) => {
-    //             data.status = response.statusCode;
-    //             data.body = JSON.parse(body);
-    //             done();
-    //         });
-    //     });
-    //     it("Status 200", () => {
-    //         expect(data.status).toBe(500);
-    //     });
-    //     it("Body", () => {
-    //         expect(data.body.message).toBe("This is an error response");
-    //     });
-    // });
+    describe("GET /search", () => {
+        var data = {};
+        beforeAll((done) => {
+            Request.get("http://localhost:3000/search", (error, response, body) => {
+              data.status = response.statusCode;
+              data.body = body;
+              done();
+            });
+        });
+        it("Status 200", () => {
+            expect(data.status).toBe(200);
+        });
+        it("Body", () => {
+            // If search does not have a dropdown menu then there is an error
+            expect(data.body.includes("dropdown-content")).toEqual(true);
+        });
+    });
 });
