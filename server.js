@@ -120,9 +120,9 @@ app.get('/', async function(req, res) {
         res.render('pages/home_page',{
         my_title: "reciMe",
         data: recipe_data.recipes
-
       })
-
+      //Send the response to the unit testing file
+      res.status(200).send();
 }); //end get request
 
 app.get('/recipe', async function(req, res) {
@@ -393,6 +393,9 @@ async function getData(url){
   return data;
 }
 
-
-app.listen(3000);
-console.log('3000 is the magic port');
+// Import modules over to unit testing
+module.exports=server
+// let server run
+var server = app.listen(3000, () => {
+    console.log("Listening on port " + server.address().port + "...");
+});
