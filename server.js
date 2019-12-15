@@ -181,6 +181,7 @@ app.get('/search', async function(req, res) {
         my_title: "reciMe",
         data: data.results
       })
+      //unit testing check if page rendered
       res.status(200).send();
 }); //end get request
 
@@ -197,6 +198,8 @@ app.get('/cuisine', async function(req, res) {
         my_title: "reciMe",
         data: data.results
       })
+      //unit test check if page rendered
+      res.status(200).send();
 
 }); //end get request
 
