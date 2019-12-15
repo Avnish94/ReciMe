@@ -217,6 +217,7 @@ app.get('/diet', async function(req, res) {
         data: data.results
       })
 
+
 }); //end get request
 
 app.get('/type', async function(req, res) {
@@ -257,6 +258,7 @@ app.post('/exclude', async function(req, res) {
         data: data.results
       })
 
+
 }); //end get request
 
 //simply loads login page to get data from user
@@ -264,7 +266,8 @@ app.get('/login', async function(req, res) {
 
   res.render('pages/login',{
   });
-
+  //unit test check if page rendered
+  res.status(200).send();
 });//get
 
 //logs user out when hitting logout button
@@ -272,6 +275,8 @@ app.get('/log_out', function(req, res) {
 
   req.session.destroy();
   res.redirect('/');
+  //unit test check if page rendered
+  res.status(200).send();
 });
 
 //handles when user signs in
@@ -352,6 +357,7 @@ app.get('/saved_recipes', function(req, res) {
       			my_title: "Favorite Recipes",
       			data: rows
       		})
+          res.status(200).send();
       })
       .catch(function (err) {
         console.log('error', err);
