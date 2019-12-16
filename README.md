@@ -71,3 +71,21 @@ GO TO https://r3cim3.herokuapp.com/
                                       RUN TESTING SUITE ON CODE
                                               
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+IN YOUR COMPUTER TERMINAL
+
+      Navigate to the directory the git repo is saved at.
+      Make sure you have node installed on your computer
+      
+      run command:
+      npm test
+      
+Test cases:
+
+      The following pages were tested to make sure project worked
+      1. localhost:3000/ checked to make sure the jpg images were rendered
+      2. localhost:3000/search checks to make sure the advance search menu is created
+      3. localhost:3000/cuisine checks to make sure the api call to spoonacular went through
+      4. localhost:3000/login checks to make sure login modal is rendered
+      5. localhost:3000/log_out checks to make sure redirect to home is working
+      6.localhost:3000/saved_recipies checks to make sure saved recipe page is rendered
+      
