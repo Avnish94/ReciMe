@@ -4,7 +4,7 @@
                                                 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The repo is structured into the following way:
+The repo is structured in the following way:
   - All-project-code-components
     - create_tables.sql (database table creation file for project)
     - server.js
@@ -63,9 +63,6 @@ IN YOUR COMPUTER TERMINAL
                                             
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GO TO https://r3cim3.herokuapp.com/
-      
-      Enjoy!
-      
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                                       RUN TESTING SUITE ON CODE
