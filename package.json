@@ -11,7 +11,7 @@
     "jquery": "^3.4.1",
     "node-fetch": "^2.6.0",
     "pg-promise": "^9.3.3",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "querystring": "^0.2.0"
   },
   "devDependencies": {},
