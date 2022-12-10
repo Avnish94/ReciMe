@@ -4,7 +4,7 @@
   "description": "a recipe website",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "cookie-parser": "^1.4.4",
     "express-session": "^1.17.0",
     "ejs-lint": "^0.3.0",
